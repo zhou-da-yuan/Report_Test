@@ -1,0 +1,55 @@
+import pytest
+
+from common.excel_utils import Excel
+excel = Excel('D://供应链场景excel报告.xlsx', "Sheet3", 'D://SCA_load//【应用报告】123-1.xlsx')
+
+class TestSheet:
+    def test_sheets_title(self):
+        try:
+            df = excel.read_caseData('源码检测', 'sheet标题及顺序')
+            if df:
+                df.remove('代码溯源分析')
+                report_sheets = excel.read_report_sheetNames()
+                assert set(df) == set(report_sheets), "数据不匹配"
+                excel.log.info("Sheet标题数据匹配成功！")
+            else:
+                pytest.fail("没有找到对应的测试用例数据。")
+                excel.log.warning("没有找到对应的测试用例数据。")
+        except Exception as e:
+            pytest.fail(f"发生错误: {e}")
+
+
+    @pytest.mark.parametrize("sheet_name",excel.read_report_sheetNames())
+    def test_sheet_headers(self, sheet_name):
+        try:
+            case_data = excel.read_caseData('源码检测', sheet_name)
+            if case_data:
+                # 读取当前工作表的首行表头
+                headers = excel.read_report_headers(sheet_name)
+                assert  set(headers) == set(case_data),"数据不匹配"
+                excel.log.info(f"工作表 {sheet_name} 的表头与用例数据匹配成功！")
+            else:
+                pytest.fail("没有找到对应的测试用例数据。")
+                excel.log.warning("没有找到对应的测试用例数据。")
+        except Exception as e:
+            print(f"发生错误: {e}")
+
+        # try:
+        #     # 读取报告中的工作表名称
+        #     report_sheets = excel_instance.read_report_sheetNames()
+        #
+        #     # 检查每个工作表的首行表头
+        #     for sheet_name in report_sheets:
+        #         # 读取测试用例数据
+        #         case_data = excel_instance.read_caseData('源码检测', sheet_name)
+        #         if case_data:
+        #             # 读取当前工作表的首行表头
+        #             headers = excel_instance.read_report_headers(sheet_name)
+        #             assert  set(headers) == set(case_data),"数据不匹配"
+        #             excel_instance.log.info(f"工作表 {sheet_name} 的表头与用例数据匹配成功！")
+        #         else:
+        #             pytest.fail("没有找到对应的测试用例数据。")
+        #             excel_instance.log.warning("没有找到对应的测试用例数据。")
+        # except Exception as e:
+        #     print(f"发生错误: {e}")
+

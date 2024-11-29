@@ -1,0 +1,15 @@
+import pytest
+
+class Test_report_SheetNames():
+    def test_sheet_titles_match(self, excel_instance):
+        try:
+            df = excel_instance.read_caseData('源码检测', 'sheet标题及顺序')
+            if df:
+                df.remove('代码溯源分析')
+                report_sheets = excel_instance.read_report_sheetNames()
+                assert set(df) == set(report_sheets), "数据不匹配"
+                print("Sheet标题数据匹配成功！")
+            else:
+                pytest.fail("没有找到对应的测试用例数据。")
+        except Exception as e:
+            pytest.fail(f"发生错误: {e}")
