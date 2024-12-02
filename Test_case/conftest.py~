@@ -1,15 +1,30 @@
+import os
 import pytest
 
+from api import Get_Report, Delete_Report
+from common import log
 from common.excel_utils import Excel
+from common.request import RunMethod
+
+BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+log = log.Log()
 
 
-# 定义一个固件，用于创建和返回 Excel 实例
 @pytest.fixture(scope="class", autouse=True)
-def excel_instance(request):
-    excel = Excel('D://供应链场景excel报告.xlsx', "Sheet3", 'D://SCA_load//【应用报告】grule-master.zip@1-20241128162134.xlsx')
+def RunMethod_instance():
+    log.info("测试开始，RunMethod 实例已创建")
+    request = RunMethod()
+    yield request
+    request.close_session()
+    log.info("测试结束，RunMethod 实例已释放")
+
+@pytest.fixture(scope="class",autouse=True)
+def app_reports():
+    # 下载报告
+    # Get_Report.app()
+    # 实例用例与测试数据
+    excel = Excel('D://供应链场景excel报告.xlsx', "全", BASE_PATH + f'\Reports\源码检测报告.xlsx')
+    yield
     excel.close()
-    request.cls.excel = excel  # 将 Excel 实例绑定到测试类
-    yield excel
-    # 清理资源
-    excel.close()
-    excel.log.info("测试结束，Excel 实例已释放")
+    # 删除报告
+    Delete_Report.app()

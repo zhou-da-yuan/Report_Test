@@ -1,0 +1,104 @@
+import json
+import os
+
+from common.request import RunMethod
+from common.log import Log
+from common.ini_manager import INIManager
+from common.yaml_utils import ConfigManager
+
+
+
+def main():
+   log = Log()
+   BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+   ini = INIManager(BASE_PATH + r'\api\variables.ini')
+   config = ConfigManager()
+
+   sca_env = config.get_config(config.get_use())
+
+   # 根据报告id查询报告状态
+   url = sca_env["base_url"]+":8443/openapi/v1/asset/report/status/"+ini.get_value('variables', 'reportId')
+
+   payload = ""
+   headers = {
+      'OpenApiUserToken': '8c20b45e8a394c818493261357d4b90a',
+      'User-Agent': 'Apifox/1.0.0 (https://apifox.com)',
+      'Content-Type': 'application/json'
+   }
+
+   response = RunMethod().api_run("POST", url, headers=headers, data=payload)
+
+   if response.status_code == 200:
+      canProceed = False
+      # 循环等待直到 status 等于 1
+      max_retries = 1000  # 最大重试次数
+      retry_interval = 30  # 重试间隔时间（秒）
+      for i in range(max_retries):
+         try:
+            response = RunMethod().api_run("POST", url, headers=headers, data=payload)
+            if response.status_code == 200:
+               status = response.json()['data']['status'][f'{task_id}']
+               if status == 5:
+                  log.info("任务完成，status 等于 5")
+                  canProceed = True
+                  print("任务完成")
+                  break
+               else:
+                  log.info(f"当前 status: {status}，等待中...")
+                  time.sleep(retry_interval)
+            else:
+               log.error(f"状态查询请求失败，状态码: {response.status_code}")
+               break
+         except Exception as e:
+            log.error(f"状态查询异常: {e}")
+            break
+      else:
+         log.warning("达到最大重试次数，status 仍未等于 5")
+
+
+
+   url = sca_env['base_url']+":8443/openapi/v1/asset/report/downLoadReport/batch"
+   payload = json.dumps({
+      "reportIds": [
+         ini.get_value('variables', 'reportId',data_type=int)
+      ]
+   })
+   headers = {
+      'OpenApiUserToken': sca_env['OpenApiUserToken'],
+      'Content-Type': 'application/json'
+   }
+
+   # 发送请求
+   try:
+      response = RunMethod().api_run("POST", url, headers=headers, data=payload)
+
+      if response.status_code == 200:
+         log.info(f"报告下载请求成功")
+         file_content = response.content
+
+         # 构建下载路径
+         BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+         download_path = BASE_PATH+r'\Reports\源码检测报告.xlsx'
+
+         # 确保下载目录存在
+         download_dir = os.path.dirname(download_path)
+         if not os.path.exists(download_dir):
+            try:
+               os.makedirs(download_dir)
+               log.info(f"创建目录: {download_dir}")
+            except Exception as e:
+               log.error(f"无法创建目录: {download_dir}, 错误: {e}")
+               exit(1)
+         with open(download_path, 'wb') as file:
+            file.write(file_content)
+
+         log.info(f"文件已成功下载并保存到: {download_path}")
+         print("下载成功")
+      else:
+         log.error(f"请求失败，状态码: {response.status_code}")
+         log.error(f"响应内容: {response.text}")
+   except Exception as e:
+      log.error(f"请求异常: {e}")
+
+if __name__ == '__main__':
+   main()

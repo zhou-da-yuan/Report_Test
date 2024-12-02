@@ -6,11 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="142c5c98-611d-465a-a3fb-df8525746c36" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Report_Test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Report_Test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/test_SourceReport_Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/test_SourceReport_Sheet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/excel_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/excel_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pytest.ini" beforeDir="false" afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,19 +41,35 @@
     "Python 测试.Python 测试 (test_SourceReport_Sheet.py 内).executor": "Run",
     "Python 测试.Python 测试 (test_report_Sheet.py 内).executor": "Run",
     "Python 测试.Python 测试 (test_report_SheetNames.py 内).executor": "Run",
+    "Python.Get_Report.executor": "Run",
+    "Python.Report.executor": "Run",
+    "Python.app_Detect.executor": "Run",
     "Python.conftest.executor": "Run",
+    "Python.create_project.executor": "Run",
+    "Python.create_report.executor": "Run",
+    "Python.delete_project.executor": "Run",
+    "Python.download_Report.executor": "Run",
     "Python.excel.executor": "Run",
     "Python.excel_utils.executor": "Run",
+    "Python.ini_manager.executor": "Run",
     "Python.log.executor": "Run",
+    "Python.yaml_utils.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.codeium.enabled": "true",
+    "com.codeium.snoozedEndTime": "0",
     "git-widget-placeholder": "master",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+    "last_opened_file_path": "C:/Users/admin/PycharmProjects/Report_Test/Packages",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\admin\PycharmProjects\Report_Test\Packages" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\admin\PycharmProjects\Report_Test\Reports" />
+      <recent name="C:\Users\admin\PycharmProjects\Report_Test\api" />
       <recent name="C:\Users\admin\PycharmProjects\Report_Test\Test_case" />
+      <recent name="C:\Users\admin\PycharmProjects\Report_Test" />
     </key>
   </component>
   <component name="RunManager">
@@ -108,16 +124,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

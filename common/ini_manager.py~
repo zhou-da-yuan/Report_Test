@@ -1,0 +1,72 @@
+import configparser
+import os
+
+
+class INIManager:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            # 调用父类的 __new__ 方法来创建实例
+            cls._instance = super(INIManager, cls).__new__(cls)
+        return cls._instance
+
+    def __init__(self, file_path):
+        """
+        初始化 INI 管理器
+        :param file_path: INI 文件的路径
+        """
+        self.file_path = file_path
+        self.config = configparser.ConfigParser()
+        self.load_config()
+
+    def load_config(self):
+        """
+        从文件中加载配置
+        """
+        if os.path.exists(self.file_path):
+            self.config.read(self.file_path)
+
+    def save_config(self):
+        """
+        将配置保存到文件
+        """
+        with open(self.file_path, 'w') as configfile:
+            self.config.write(configfile)
+
+    def get_value(self, section, option, default=None):
+        """
+        获取指定节和选项的值
+        :param section: 节名称
+        :param option: 选项名称
+        :param default: 如果选项不存在，返回的默认值
+        :return: 选项的值或默认值
+        """
+        try:
+            return self.config.get(section, option)
+        except (configparser.NoSectionError, configparser.NoOptionError):
+            return default
+
+    def set_value(self, section, option, value):
+        """
+        设置指定节和选项的值
+        :param section: 节名称
+        :param option: 选项名称
+        :param value: 选项的值
+        """
+        if not self.config.has_section(section):
+            self.config.add_section(section)
+        self.config.set(section, option, str(value))
+
+
+if __name__ == "__main__":
+    # 创建 INI 管理器实例
+
+    # 设置配置
+    INIManager('../api/variables.ini').set_value('variables', 'projectId', '2223322')
+
+    # 保存配置
+    INIManager('../api/variables.ini').save_config()
+
+    # 读取并打印配置
+    print(INIManager('../api/variables.ini').get_value('variables', 'projectId'))

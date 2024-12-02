@@ -1,0 +1,37 @@
+import os
+import time
+
+import pytest
+
+from api import create_project, app_Detect, download_Report, delete_project
+from common import log
+from common.excel_utils import Excel
+from common.request import RunMethod
+
+log = log.Log()
+BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# 定义一个固件，用于创建和返回 Excel 实例
+@pytest.fixture(scope="class", autouse=True)
+def excel_instance(request):
+    excel = Excel('D://供应链场景excel报告.xlsx', "全", BASE_PATH+f'\Reports\源码检测报告.xlsx')
+    excel.close()
+    request.cls.excel = excel  # 将 Excel 实例绑定到测试类
+    yield excel
+    # 清理资源
+    excel.close()
+    log.info("测试结束，Excel 实例已释放")
+
+@pytest.fixture(scope="class", autouse=True)
+def RunMethod_instance():
+    request = RunMethod()
+    yield request
+    request.close_session()
+    log.info("测试结束，RunMethod 实例已释放")
+
+@pytest.fixture(scope="session", autouse=True)
+def api_request():
+    create_project.main()
+    app_Detect.main()
+    create_project.main()
+    download_Report.main()
+    delete_project.main()

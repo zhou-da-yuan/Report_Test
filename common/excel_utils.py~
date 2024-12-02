@@ -33,7 +33,7 @@ class Excel:
                 self.case_dataframe = pd.read_excel(self.case_file_path, sheet_name=self.case_file_sheet)
                 self.log.info("用例数据加载完成")
             except Exception as e:
-                self.log.error(f"用例加载发生错误: {e}")
+                print(f"用例加载发生错误: {e}")
 
 
     def load_report_data(self):
@@ -44,7 +44,7 @@ class Excel:
                 self.report_excel = pd.ExcelFile(self.report_file_path)
                 self.log.info("报告数据加载完成")
             except Exception as e:
-                self.log.error(f"报告加载发生错误: {e}")
+                print(f"报告加载发生错误: {e}")
 
     def read_caseData(self, module_name, case_name):
         """根据模块名和用例名筛选数据并转换为列表"""
