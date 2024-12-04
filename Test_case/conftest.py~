@@ -1,7 +1,7 @@
 import os
 import pytest
 
-from api import Get_Report, Delete_Report
+from Reports import Delete_Report
 from common import log
 from common.excel_utils import Excel
 from common.request import RunMethod
@@ -27,4 +27,4 @@ def app_reports():
     yield
     excel.close()
     # 删除报告
-    Delete_Report.app()
+    # Delete_Report.app()

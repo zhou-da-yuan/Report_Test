@@ -1,5 +1,6 @@
 import json
 import os
+import time
 
 from common.request import RunMethod
 from common.log import Log
@@ -31,17 +32,17 @@ def main():
    if response.status_code == 200:
       canProceed = False
       # 循环等待直到 status 等于 1
-      max_retries = 1000  # 最大重试次数
-      retry_interval = 30  # 重试间隔时间（秒）
+      max_retries = 100  # 最大重试次数
+      retry_interval = 10  # 重试间隔时间（秒）
       for i in range(max_retries):
          try:
             response = RunMethod().api_run("POST", url, headers=headers, data=payload)
             if response.status_code == 200:
-               status = response.json()['data']['status'][f'{task_id}']
-               if status == 5:
-                  log.info("任务完成，status 等于 5")
+               status = response.json()['data']['status']
+               if status == 1:
+                  log.info("报告生成完成，status 等于 1")
                   canProceed = True
-                  print("任务完成")
+                  print("报告生成完成")
                   break
                else:
                   log.info(f"当前 status: {status}，等待中...")
@@ -56,49 +57,49 @@ def main():
          log.warning("达到最大重试次数，status 仍未等于 5")
 
 
+      if canProceed:
+         url = sca_env['base_url']+":8443/openapi/v1/asset/report/downLoadReport/batch"
+         payload = json.dumps({
+            "reportIds": [
+               ini.get_value('variables', 'reportId',data_type=int)
+            ]
+         })
+         headers = {
+            'OpenApiUserToken': sca_env['OpenApiUserToken'],
+            'Content-Type': 'application/json'
+         }
 
-   url = sca_env['base_url']+":8443/openapi/v1/asset/report/downLoadReport/batch"
-   payload = json.dumps({
-      "reportIds": [
-         ini.get_value('variables', 'reportId',data_type=int)
-      ]
-   })
-   headers = {
-      'OpenApiUserToken': sca_env['OpenApiUserToken'],
-      'Content-Type': 'application/json'
-   }
+         # 发送请求
+         try:
+            response = RunMethod().api_run("POST", url, headers=headers, data=payload)
 
-   # 发送请求
-   try:
-      response = RunMethod().api_run("POST", url, headers=headers, data=payload)
+            if response.status_code == 200:
+               log.info(f"报告下载请求成功")
+               file_content = response.content
 
-      if response.status_code == 200:
-         log.info(f"报告下载请求成功")
-         file_content = response.content
+               # 构建下载路径
+               BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+               download_path = BASE_PATH+r'\Reports\源码检测报告.xlsx'
 
-         # 构建下载路径
-         BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-         download_path = BASE_PATH+r'\Reports\源码检测报告.xlsx'
+               # 确保下载目录存在
+               download_dir = os.path.dirname(download_path)
+               if not os.path.exists(download_dir):
+                  try:
+                     os.makedirs(download_dir)
+                     log.info(f"创建目录: {download_dir}")
+                  except Exception as e:
+                     log.error(f"无法创建目录: {download_dir}, 错误: {e}")
+                     exit(1)
+               with open(download_path, 'wb') as file:
+                  file.write(file_content)
 
-         # 确保下载目录存在
-         download_dir = os.path.dirname(download_path)
-         if not os.path.exists(download_dir):
-            try:
-               os.makedirs(download_dir)
-               log.info(f"创建目录: {download_dir}")
-            except Exception as e:
-               log.error(f"无法创建目录: {download_dir}, 错误: {e}")
-               exit(1)
-         with open(download_path, 'wb') as file:
-            file.write(file_content)
-
-         log.info(f"文件已成功下载并保存到: {download_path}")
-         print("下载成功")
-      else:
-         log.error(f"请求失败，状态码: {response.status_code}")
-         log.error(f"响应内容: {response.text}")
-   except Exception as e:
-      log.error(f"请求异常: {e}")
+               log.info(f"文件已成功下载并保存到: {download_path}")
+               print("下载成功")
+            else:
+               log.error(f"请求失败，状态码: {response.status_code}")
+               log.error(f"响应内容: {response.text}")
+         except Exception as e:
+            log.error(f"请求异常: {e}")
 
 if __name__ == '__main__':
    main()

@@ -11,13 +11,14 @@ from common.yaml_utils import ConfigManager
 
 
 def main():
-   BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-   ini = INIManager(BASE_PATH + r'\api\variables.ini')
    log = Log()
    config = ConfigManager()
-
    sca_env = config.get_config(config.get_use())
 
+   BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+   ini = INIManager(BASE_PATH + r'\api\variables.ini')
+
+   # 查询任务状态
    url = sca_env['base_url']+":8443/openapi/v1/task/batch/status"
    task_id = ini.get_value('variables', 'scaTaskId',data_type=int)
    payload = json.dumps({
@@ -59,7 +60,7 @@ def main():
       else:
          log.warning("达到最大重试次数，status 仍未等于 5")
 
-      # 生成报告
+      # 任务完成后生成报告
       if canProceed:
          url = sca_env['base_url']+":8443/openapi/v1/asset/report/task"
 

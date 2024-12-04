@@ -56,7 +56,7 @@ def main():
       else:
          log.warning("达到最大重试次数，status 仍未等于 5")
 
-
+      # 报告生成完成后再下载报告
       if canProceed:
          url = sca_env['base_url']+":8443/openapi/v1/asset/report/downLoadReport/batch"
          payload = json.dumps({

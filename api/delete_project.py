@@ -7,12 +7,12 @@ from common.yaml_utils import ConfigManager
 
 
 def main():
-    BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    ini = INIManager(BASE_PATH + r'\api\variables.ini')
     log = Log()
     config = ConfigManager()
-
     sca_env = config.get_config(config.get_use())
+
+    BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    ini = INIManager(BASE_PATH + r'\api\variables.ini')
 
     url = sca_env['base_url']+":8443/openapi/v1/project/delete"
     project_id = ini.get_value('variables', 'projectId',data_type=int)
