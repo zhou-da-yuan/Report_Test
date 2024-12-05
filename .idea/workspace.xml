@@ -6,14 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="142c5c98-611d-465a-a3fb-df8525746c36" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reports/Delete_Report.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reports/Delete_Report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Reports/Get_Report.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reports/Get_Report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test_case/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/test_BinaryReport_Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/test_BinaryReport_Sheet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test_case/test_SourceReport_Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/test_SourceReport_Sheet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/download_Report.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/download_Report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/variables.ini" beforeDir="false" afterPath="$PROJECT_DIR$/api/variables.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/excel_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/excel_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/yaml_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/yaml_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/sca.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/sca.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +63,7 @@
     "Python.conftest.executor": "Run",
     "Python.create_project.executor": "Run",
     "Python.create_report.executor": "Run",
+    "Python.delete_Report.executor": "Run",
     "Python.delete_project.executor": "Run",
     "Python.download_Report.executor": "Run",
     "Python.excel.executor": "Run",

@@ -1,6 +1,6 @@
 import sys
 
-from api import create_project, app_Detect, create_report, download_Report, delete_project, binary_Detect
+from api import *
 from common.log import Log
 
 log = Log()
@@ -33,6 +33,11 @@ def app():
         log.info(f"{function_name}-开始删除项目...")
         delete_project.main()
         log.info(f"{function_name}-项目删除成功")
+
+        # 删除报告
+        log.info(f"{function_name}-开始删除报告...")
+        delete_Report.main()
+        log.info(f"{function_name}-报告删除成功")
     except Exception as e:
         log.error(f"{function_name}-执行过程中发生错误: {e}")
 
@@ -63,8 +68,14 @@ def binary():
         log.info(f"{function_name}-开始删除项目...")
         delete_project.main()
         log.info(f"{function_name}-项目删除成功")
+
+        # 删除报告
+        log.info(f"{function_name}-开始删除报告...")
+        delete_Report.main()
+        log.info(f"{function_name}-报告删除成功")
     except Exception as e:
         log.error(f"{function_name}-执行过程中发生错误: {e}")
+
 
 
 if __name__ == "__main__":

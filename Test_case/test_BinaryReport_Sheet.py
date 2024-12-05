@@ -12,6 +12,7 @@ BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 Get_Report.binary()
 # 实例用例与测试数据
 excel = Excel('D://供应链场景excel报告.xlsx', "sheet标题及表头测试", BASE_PATH+f'\Reports\二进制检测报告.xlsx')
+# 清理测试数据
 def teardown_module(module):
     excel.close()
     log.info("test_BinaryReport_Sheet测试结束，报告已关闭！")

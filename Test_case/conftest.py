@@ -3,7 +3,6 @@ import pytest
 
 from Reports import Delete_Report
 from common import log
-from common.excel_utils import Excel
 from common.request import RunMethod
 
 BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
