@@ -6,17 +6,9 @@ from common.log import Log
 # 忽略特定的警告
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 class Excel:
-    _instance = None
 
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(Excel, cls).__new__(cls)
-            cls._instance.__initialized = False
-        return cls._instance
 
     def __init__(self, case_file_path, case_file_sheet, report_file_path):
-        if self.__initialized:
-            return
         self.case_file_path = case_file_path
         self.case_file_sheet = case_file_sheet
         self.report_file_path = report_file_path
@@ -33,7 +25,7 @@ class Excel:
                 self.case_dataframe = pd.read_excel(self.case_file_path, sheet_name=self.case_file_sheet)
                 self.log.info("用例数据加载完成")
             except Exception as e:
-                print(f"用例加载发生错误: {e}")
+                self.log.error(f"用例加载发生错误: {e}")
 
 
     def load_report_data(self):
@@ -44,7 +36,7 @@ class Excel:
                 self.report_excel = pd.ExcelFile(self.report_file_path)
                 self.log.info("报告数据加载完成")
             except Exception as e:
-                print(f"报告加载发生错误: {e}")
+                self.log.error(f"报告加载发生错误: {e}")
 
     def read_caseData(self, module_name, case_name):
         """根据模块名和用例名筛选数据并转换为列表"""
@@ -58,7 +50,7 @@ class Excel:
             self.log.info(f"用例数据读取成功: {result}")
             return result
         else:
-            self.log.warning(f"没有找到工作表 {case_name} 对应的测试用例数据")
+            self.log.warning(f"没有找到工作表模块：{module_name} 对应的测试用例数据：{case_name}")
             return []
 
     def read_report_sheetNames(self):

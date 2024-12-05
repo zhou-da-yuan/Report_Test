@@ -6,11 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="142c5c98-611d-465a-a3fb-df8525746c36" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app_Detect.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/app_Detect.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/create_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/create_project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/create_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/create_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reports/Delete_Report.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reports/Delete_Report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reports/Get_Report.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reports/Get_Report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/test_SourceReport_Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/test_SourceReport_Sheet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/download_Report.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/download_Report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/variables.ini" beforeDir="false" afterPath="$PROJECT_DIR$/api/variables.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/excel_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/excel_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/yaml_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/yaml_utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +30,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "zhou-da-yuan"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/zhou-da-yuan/Report_Test",
+    "accountId": "65067061-88d9-46ec-a737-874609dd0e19"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -41,9 +56,11 @@
     "Python 测试.Python 测试 (test_SourceReport_Sheet.py 内).executor": "Run",
     "Python 测试.Python 测试 (test_report_Sheet.py 内).executor": "Run",
     "Python 测试.Python 测试 (test_report_SheetNames.py 内).executor": "Run",
+    "Python.Delete_Report.executor": "Run",
     "Python.Get_Report.executor": "Run",
     "Python.Report.executor": "Run",
     "Python.app_Detect.executor": "Run",
+    "Python.binary_Detect.executor": "Run",
     "Python.conftest.executor": "Run",
     "Python.create_project.executor": "Run",
     "Python.create_report.executor": "Run",

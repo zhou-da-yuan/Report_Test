@@ -24,7 +24,7 @@ class ConfigManager:
                 self._config = yaml.load(f, Loader=yaml.FullLoader)
                 log.info("读取sca配置文件成功")
         except Exception as e:
-            log.warning("读取sca配置文件出错: {}".format(e))
+            log.error("读取sca配置文件出错: {}".format(e))
             self._config = {}
 
     def get_use(self):
@@ -32,7 +32,7 @@ class ConfigManager:
         if use_env:
             log.info("使用环境：{}".format(use_env))
         else:
-            log.warning("未找到使用环境配置")
+            log.error("未找到使用环境配置")
         return use_env
 
     def get_config(self, env):
@@ -40,7 +40,7 @@ class ConfigManager:
         if env_config:
             log.info("环境配置：{}".format(env_config))
         else:
-            log.warning("未找到环境配置：{}".format(env))
+            log.error("未找到环境配置：{}".format(env))
         return env_config
 
 

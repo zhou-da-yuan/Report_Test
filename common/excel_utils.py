@@ -6,24 +6,15 @@ from common.log import Log
 # 忽略特定的警告
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 class Excel:
-    _instance = None
 
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(Excel, cls).__new__(cls)
-            cls._instance.__initialized = False
-        return cls._instance
 
     def __init__(self, case_file_path, case_file_sheet, report_file_path):
-        if self.__initialized:
-            return
         self.case_file_path = case_file_path
         self.case_file_sheet = case_file_sheet
         self.report_file_path = report_file_path
         self.case_dataframe = None  # 用于缓存用例数据
         self.report_excel = None  # 用于缓存报告文件
         self.log = Log()  # 日志器对象
-        self.__initialized = True
 
     def load_case_data(self):
         """加载用例数据到dataframe中"""
@@ -58,7 +49,7 @@ class Excel:
             self.log.info(f"用例数据读取成功: {result}")
             return result
         else:
-            self.log.warning(f"没有找到工作表 {case_name} 对应的测试用例数据")
+            self.log.warning(f"没有找到工作表模块：{module_name} 对应的测试用例数据：{case_name}")
             return []
 
     def read_report_sheetNames(self):
@@ -94,38 +85,4 @@ def str_to_list(str_val):
     return [item.strip() for item in str_val.split(',')]
 
 if __name__ == '__main__':
-    excel = Excel('D://供应链场景excel报告.xlsx', "全", 'D://SCA_load//【应用报告】grule-master.zip@2-20241129153126.xlsx')
-
-    # try:
-    #     df = excel.read_caseData('源码检测', 'sheet标题及顺序')
-    #     if  df:
-    #         df.remove('代码溯源分析')
-    #         report_sheets = excel.read_report_sheetNames()
-    #         assert set(df) == set(report_sheets), "数据不匹配"
-    #         print("Sheet标题数据匹配成功！")
-    #     else:
-    #         print("没有找到对应的测试用例数据。")
-    # except Exception as e:
-    #     print(f"发生错误: {e}")
-
-    try:
-        # 读取报告中的工作表名称
-        report_sheets = excel.read_report_sheetNames()
-
-        # 检查每个工作表的首行表头
-        for sheet_name in report_sheets:
-            # 读取测试用例数据
-            case_data = excel.read_caseData('源码检测', sheet_name)
-            if case_data:
-
-                # 读取当前工作表的首行表头
-                headers = excel.read_report_headers(sheet_name)
-                if set(headers) != set(case_data):
-                    print(f"工作表 {sheet_name} 的表头与用例数据不匹配: {headers} != {case_data}")
-                    assert False,"不匹配"
-                else:
-                    print(f"工作表 {sheet_name} 的表头与用例数据匹配成功！")
-            else:
-                print(f"没有找到工作表 {sheet_name} 对应的测试用例数据。")
-    except Exception as e:
-        print(f"发生错误: {e}")
+    pass

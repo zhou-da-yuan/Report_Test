@@ -11,8 +11,12 @@ BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 下载报告
 Get_Report.app()
 # 实例用例与测试数据
-excel = Excel('D://供应链场景excel报告.xlsx', "全", BASE_PATH+f'\Reports\源码检测报告.xlsx')
+excel = Excel('D://供应链场景excel报告.xlsx', "sheet标题及表头测试", BASE_PATH+f'\Reports\源码检测报告.xlsx')
+def teardown_module(module):
+    excel.close()
+    log.info("test_SourceReport_Sheet测试结束，报告已关闭！")
 log = Log()
+
 class TestSheet:
     # 测试工作表标题
     def test_sheets_title(self):

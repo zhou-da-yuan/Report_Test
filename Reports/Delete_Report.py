@@ -1,3 +1,4 @@
+import glob
 import os
 
 from common.log import Log
@@ -6,18 +7,31 @@ BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 log = Log()
 def app():
     # 删除报告
-    file_path = BASE_PATH + '\Reports\源码检测报告.xlsx'
-    try:
-        # 删除文件
-        os.remove(file_path)
-        log.info("源码检测报告成功删除")
-        print(f"文件已成功删除: {file_path}")
-    except FileNotFoundError:
-        log.error("源码检测报告未找到")
-        print(f"文件未找到: {file_path}")
-    except PermissionError:
-        log.error("权限错误")
-        print(f"权限错误: 无法删除文件 {file_path}")
-    except Exception as e:
-        log.error("删除文件时发生错误")
-        print(f"删除文件时发生错误: {e}")
+    reports_dir = os.path.join(BASE_PATH, 'Reports')
+
+    # 检查 Reports 目录是否存在
+    if not os.path.exists(reports_dir):
+        log.warning(f"目录不存在: {reports_dir}")
+        print(f"目录不存在: {reports_dir}")
+        return
+
+    # 查找所有的 .xlsx 文件
+    xlsx_files = glob.glob(os.path.join(reports_dir, '*.xlsx'))
+
+    if not xlsx_files:
+        log.info("没有找到任何 .xlsx 文件")
+        print("没有找到任何 .xlsx 文件")
+        return
+
+    # 删除每个 .xlsx 文件
+    for file_path in xlsx_files:
+        try:
+            os.remove(file_path)
+            log.info(f"文件已成功删除: {file_path}")
+            print(f"文件已成功删除: {file_path}")
+        except Exception as e:
+            log.error(f"删除文件时发生错误: {file_path}, 错误信息: {e}")
+            print(f"删除文件时发生错误: {file_path}, 错误信息: {e}")
+
+if __name__ == '__main__':
+    app()
