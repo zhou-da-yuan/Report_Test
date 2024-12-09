@@ -36,7 +36,7 @@ def main():
         canProceed = False
         # 循环等待直到 status 等于 5
         max_retries = 1000  # 最大重试次数
-        retry_interval = 10  # 重试间隔时间（秒）
+        retry_interval = 30  # 重试间隔时间（秒）
         for i in range(max_retries):
             try:
                 response = RunMethod().api_run("POST", url, headers=headers, data=payload)

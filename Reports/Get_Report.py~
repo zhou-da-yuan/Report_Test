@@ -92,7 +92,7 @@ def image():
 
         # 下载报告
         log.info(f"{function_name}-开始下载报告...")
-        download_Report.main("镜像检测报告")
+        download_Report.main("二进制检测报告")
         log.info(f"{function_name}-报告下载成功")
 
         # 删除报告

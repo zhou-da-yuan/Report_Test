@@ -19,11 +19,12 @@ def RunMethod_instance():
 
 @pytest.fixture(scope="session",autouse=True)
 def clear_reports():
-    Delete_Report.all()
     yield    # 删除报告
+    Delete_Report.all()
+
 
 @pytest.fixture(scope="session", autouse=True)
 def project_manager():
     Get_Report.createProject()
     yield
-    Get_Report.deleteProject()
+    # Get_Report.deleteProject()

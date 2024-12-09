@@ -22,7 +22,6 @@ def main(fileName):
     payload = ""
     headers = {
         'OpenApiUserToken': '8c20b45e8a394c818493261357d4b90a',
-        'User-Agent': 'Apifox/1.0.0 (https://apifox.com)',
         'Content-Type': 'application/json'
     }
 

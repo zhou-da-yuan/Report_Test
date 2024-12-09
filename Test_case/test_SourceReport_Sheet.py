@@ -7,18 +7,19 @@ from common.excel_utils import Excel
 from common.log import Log
 
 BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-def setup_module(module):
-    # 下载报告
-    Get_Report.app()
+log = Log()
 
 # 实例用例与测试数据
 excel = Excel('D://供应链场景excel报告.xlsx', "sheet标题及表头测试", BASE_PATH+f'\Reports\源码检测报告.xlsx')
+
+# 下载报告
+def setup_module(module):
+    Get_Report.app()
+
 # 清理测试数据
 def teardown_module(module):
     excel.close()
     log.info("test_SourceReport_Sheet测试结束，报告已关闭！")
-log = Log()
 
 class TestSheet:
     # 测试工作表标题

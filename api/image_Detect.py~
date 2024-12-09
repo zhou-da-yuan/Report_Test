@@ -26,6 +26,7 @@ def main():
                'enablePoison': 'true',
                'sensitive': 'true'
                }
+    log.debug(payload)
     files = [
         ('file', ('alpine.tar', open(file_path, 'rb'), 'application/x-tar'))
     ]
