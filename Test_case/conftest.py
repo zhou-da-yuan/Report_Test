@@ -19,5 +19,5 @@ def RunMethod_instance():
 
 @pytest.fixture(scope="session",autouse=True)
 def clear_reports():
-    yield    # 删除报告
     Delete_Report.app()
+    yield    # 删除报告

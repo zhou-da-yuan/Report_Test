@@ -1,6 +1,5 @@
 import sys
 
-# from api import create_project, app_Detect, create_report, download_Report, delete_project, binary_Detect, delete_Report
 from api import *
 from common.log import Log
 

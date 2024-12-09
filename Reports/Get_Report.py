@@ -5,7 +5,7 @@ from common.log import Log
 
 log = Log()
 
-
+# 源码检测
 def app():
     function_name = f"{__name__}.{sys._getframe().f_code.co_name}"
     try:
@@ -41,6 +41,7 @@ def app():
     except Exception as e:
         log.error(f"{function_name}-执行过程中发生错误: {e}")
 
+# 二进制检测
 def binary():
     function_name = f"{__name__}.{sys._getframe().f_code.co_name}"
     try:

@@ -8,11 +8,15 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Reports/Get_Report.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reports/Get_Report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test_case/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/test_BinaryReport_Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/test_BinaryReport_Sheet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/test_SourceReport_Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/test_SourceReport_Sheet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/app_Detect.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/app_Detect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/binary_Detect.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binary_Detect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/create_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/create_project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/create_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/create_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/delete_Report.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/delete_Report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/delete_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/delete_project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/download_Report.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/download_Report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/variables.ini" beforeDir="false" afterPath="$PROJECT_DIR$/api/variables.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/sca.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/sca.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/excel_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/excel_utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +45,9 @@
     "accountId": "65067061-88d9-46ec-a737-874609dd0e19"
   }
 }]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>

@@ -42,7 +42,7 @@ class Excel:
         self.log.info(f"开始读取用例数据: 模块名-{module_name}, 用例名称-{case_name}")
         self.load_case_data()
         df = self.case_dataframe
-        filtered_df = df[(df['所属模块'] == module_name) & (df['用例名称'] == case_name)]
+        filtered_df = df[(df['所属模块'] == module_name) & (df['用例名称(关键字)'] == case_name)]
         if not filtered_df.empty:
             data_list = filtered_df["数据"].values[0].split(',')
             result = [item.strip() for item in data_list]
