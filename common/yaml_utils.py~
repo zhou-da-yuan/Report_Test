@@ -33,7 +33,7 @@ class ConfigManager:
         if self._use_env is None and self._config is not None:
             self._use_env = self._config.get('use')
             if self._use_env:
-                log.info("当前使用环境：{}".format(self._use_env))
+                log.info("使用环境：{}".format(self._use_env))
                 log.info("环境配置：{}".format(self.get_config()))
             else:
                 log.error("未找到使用环境配置")

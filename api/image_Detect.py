@@ -12,7 +12,7 @@ BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def main():
     log = Log()
     config = ConfigManager()
-    sca_env = config.get_config(config.get_use())
+    sca_env = config.get_config()
     ini = INIManager(BASE_PATH + r'\api\variables.ini')
 
     file_path = os.path.join(BASE_PATH, r'Packages\alpine.tar')

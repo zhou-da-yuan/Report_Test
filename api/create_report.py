@@ -12,7 +12,7 @@ from common.yaml_utils import ConfigManager
 def main():
     log = Log()
     config = ConfigManager()
-    sca_env = config.get_config(config.get_use())
+    sca_env = config.get_config()
 
     BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     ini = INIManager(BASE_PATH + r'\api\variables.ini')

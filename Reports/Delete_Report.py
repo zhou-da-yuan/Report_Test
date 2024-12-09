@@ -5,7 +5,7 @@ from common.log import Log
 
 BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 log = Log()
-def app():
+def all():
     # 删除报告
     reports_dir = os.path.join(BASE_PATH, 'Reports')
 
@@ -34,4 +34,4 @@ def app():
             print(f"删除文件时发生错误: {file_path}, 错误信息: {e}")
 
 if __name__ == '__main__':
-    app()
+    all()

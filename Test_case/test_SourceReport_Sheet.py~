@@ -11,9 +11,9 @@ BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def setup_module(module):
     # 下载报告
     Get_Report.app()
-
 # 实例用例与测试数据
 excel = Excel('D://供应链场景excel报告.xlsx', "sheet标题及表头测试", BASE_PATH+f'\Reports\源码检测报告.xlsx')
+sheet_names = excel.read_report_sheetNames()
 # 清理测试数据
 def teardown_module(module):
     excel.close()
@@ -38,7 +38,7 @@ class TestSheet:
             pytest.fail(f"发生错误: {e}")
 
     # 测试每个工作表的表头
-    @pytest.mark.parametrize("sheet_name",excel.read_caseData('源码检测', 'sheet标题'))
+    @pytest.mark.parametrize("sheet_name",sheet_names)
     def test_sheet_headers(self, sheet_name):
         try:
             case_data = excel.read_caseData('源码检测', sheet_name)

@@ -73,7 +73,7 @@ def main(fileName):
 
                 response = RunMethod().api_run("POST", url, headers=headers, data=payload)
 
-                if response.json()['code'] == 0:
+                if response.status_code == 200:
                     log.info(f"报告下载请求成功")
                     file_content = response.content
 

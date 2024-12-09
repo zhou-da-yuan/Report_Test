@@ -14,7 +14,7 @@ def main(fileName):
     ini = INIManager(BASE_PATH + r'\api\variables.ini')
     config = ConfigManager()
 
-    sca_env = config.get_config(config.get_use())
+    sca_env = config.get_config()
 
     # 根据报告id查询报告状态
     url = sca_env["base_url"] + ":8443/openapi/v1/asset/report/status/" + ini.get_value('variables', 'reportId')
