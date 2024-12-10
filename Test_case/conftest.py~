@@ -27,4 +27,4 @@ def clear_reports():
 def project_manager():
     Get_Report.createProject()
     yield
-    # Get_Report.deleteProject()
+    Get_Report.deleteProject()

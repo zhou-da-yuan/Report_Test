@@ -13,7 +13,7 @@ log = log.Log()
 def RunMethod_instance():
     log.info("测试开始，RunMethod 实例已创建")
     request = RunMethod()
-    yield request
+    yield request # 创建requests实例
     request.close_session()
     log.info("测试结束，RunMethod 实例已释放")
 
@@ -26,5 +26,5 @@ def clear_reports():
 @pytest.fixture(scope="session", autouse=True)
 def project_manager():
     Get_Report.createProject()
-    yield
+    yield # 创建项目/删除项目
     Get_Report.deleteProject()

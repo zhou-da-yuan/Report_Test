@@ -99,6 +99,9 @@ def main(fileName):
                     log.error(f"响应内容: {response.text}")
             except Exception as e:
                 log.error(f"下载报告请求异常: {e}")
+    else:
+        log.error(f"报告查询失败: {response.json()}")
+
 
 
 if __name__ == '__main__':

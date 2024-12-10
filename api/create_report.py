@@ -50,6 +50,9 @@ def main():
                     else:
                         log.info(f"当前 status: {status}，等待中...")
                         time.sleep(retry_interval)
+                        if status == 8:
+                            log.error("检测任务失败，请查看检测详情")
+                            break
                 else:
                     log.error(f"状态查询请求失败，状态码: {response.status_code}")
                     break
@@ -87,6 +90,10 @@ def main():
             else:
                 log.error(f"报告生成失败{response.json()}")
                 print(f"报告生成id {task_id}")
+        else:
+            ini.set_value('variables', 'reportId', "")
+            ini.save_config()
+            log.error("任务未完成，无法生成报告")
 
 
 if __name__ == '__main__':
