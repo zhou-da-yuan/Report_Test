@@ -14,7 +14,7 @@ data_utils = DataUtils()
 
 # 清理测试数据
 def test_source_appInfo():
-    # Get_Report.source()
+    Get_Report.source()
     info = InfoGet() # 顺序不能换【要先检测更新了变量数据才能加载新任务id】,导入模块会执行模块级语句，创建对象会执行对象初始化语句
 
     excel = Excel('D://供应链场景excel报告.xlsx', "sheet标题及表头测试", BASE_PATH + r'\Reports\源码检测报告.xlsx')
@@ -42,4 +42,4 @@ def test_source_appInfo():
         assert False, f"部分应用信息匹配失败，请查看日志"
 
     excel.close()
-    log.info("测试结束，报告已关闭！")
+    log.info("test_SourceReport_Sheet测试结束，报告已关闭！")

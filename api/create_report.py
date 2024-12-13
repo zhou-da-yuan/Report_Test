@@ -92,6 +92,7 @@ def main():
                             if status == 5:
                                 log.info("同源任务完成，status 等于 5")
                                 canProceed = True
+                                ini.set_value('variables', 'socTaskStatus', '0')
                                 print("同源任务完成")
                                 break
                             else:

@@ -26,12 +26,12 @@ def deleteProject():
         log.error(f"{function_name}-执行过程中发生错误: {e}")
 
 # 源码检测
-def app():
+def source():
     function_name = f"{__name__}.{sys._getframe().f_code.co_name}"
     try:
         # 应用检测
         log.info(f"{function_name}-开始应用检测...")
-        app_Detect.main()
+        source_Detect.main()
         log.info(f"{function_name}-应用检测完成")
 
         # 创建报告

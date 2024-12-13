@@ -1,6 +1,8 @@
 import os
 
-from common.data_utils import JsonUtil
+
+from common.data_utils import JsonUtil, DataUtils
+from common.excel_utils import Excel
 from common.request import RunMethod
 from common.log import Log
 from common.ini_manager import INIManager
@@ -10,7 +12,6 @@ BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 log = Log()
 config = ConfigManager()
 sca_env = config.get_config()
-ini = INIManager(BASE_PATH + r'\api\variables.ini')
 
 # web接口获取应用信息
 def get_VOInfoByTaskId(taskId):
@@ -27,7 +28,7 @@ def get_VOInfoByTaskId(taskId):
             print(f"获取VOIn信息成功{response.json()}")
             return response.json()
         else:
-            log.error("VOIn请求失败")
+            log.error(f"VOIn请求失败{response.json()}")
             print(f"VOIn请求失败{response.json()}")
 
     except Exception as e:
@@ -49,7 +50,7 @@ def get_CVLCountTaskId(taskId):
             print(f"获取CVLCount信息成功{response.json()}")
             return response.json()
         else:
-            log.error("CVLCount请求失败")
+            log.error(f"CVLCount请求失败{response.json()}")
             print(f"CVLCount请求失败{response.json()}")
 
     except Exception as e:
@@ -70,32 +71,65 @@ def get_TaskDetails(taskId):
             print(f"获取TaskDetails成功{response.json()}")
             return response.json()
         else:
-            log.error("获取TaskDetails请求失败")
+            log.error(f"获取TaskDetails请求失败{response.json()}")
             print(f"获取TaskDetails请求失败{response.json()}")
 
     except Exception as e:
         log.error("获取TaskDetails失败")
         print(e)
 
+class InfoGet:
+    # 初始化获取接口信息
+    def __init__(self):
+        ini = INIManager(BASE_PATH + r'\api\variables.ini')
+        self.taskId = ini.get_value('variables', 'sourcetaskid')
 
-# 配置app检测基础应用信息
-def get_appInfo(taskId):
-    VOInfo = get_VOInfoByTaskId(taskId)
-    CVLCount = get_CVLCountTaskId(taskId)
-    TaskDetails = get_TaskDetails(taskId)
+        VOInfo = get_VOInfoByTaskId(self.taskId)
+        CVLCount = get_CVLCountTaskId(self.taskId)
+        TaskDetails = get_TaskDetails(self.taskId)
+        self.objects = {
+            'ini': ini,
+            'VOInfo': VOInfo,
+            'CVLCount': CVLCount,
+            'TaskDetails': TaskDetails
+        }
+        self.json_util = JsonUtil(r'casedata\ApplicationInfo.json')  # 替换为你的 JSON 文件路径
 
-    objects = {
-        'ini': ini,
-        'VOInfo': VOInfo,
-        'CVLCount': CVLCount,
-        'TaskDetails': TaskDetails
-    }
 
-    json_util = JsonUtil('casedata/ApplicationInfo.json')  # 替换为你的 JSON 文件路径
-    app_info = json_util.read_ApplicationInfo("appInfo", objects)
-    # print(app_info)
-    return app_info
+    # 配置app检测基础应用信息
+    def get_appInfo(self):
+
+        app_info = self.json_util.read_ApplicationInfo("appInfo", self.objects)
+        # 销毁应用信息对象
+        for obj_name in list(self.objects.keys()):
+            del self.objects[obj_name]
+
+        return app_info
 
 
 if __name__ == '__main__':
-    get_appInfo(612780)
+    excel = Excel('D://供应链场景excel报告.xlsx', "sheet标题及表头测试", BASE_PATH + r'\Reports\源码检测报告.xlsx')
+
+    report_data = excel.get_ApplicationInfo()
+    info = InfoGet()
+    case_data = info.get_appInfo()
+
+    data_utils = DataUtils()
+    comparison_results = data_utils.compare_dicts(report_data, case_data)
+
+    flag = True
+    for key, equal, report_value, case_value in comparison_results:
+        if equal is None:
+            log.warning(f"Key '{key}' not found in report_data.")
+            print(f"Key '{key}' not found in report_data.")
+        elif equal:
+            log.info(f"Key '{key}' 匹配成功！")
+        else:
+            log.error(f"Key '{key}': Values differ - Report: '{report_value}', Case: '{case_value}'")
+            flag = False
+    if flag:
+        log.info(f"所有应用信息匹配成功")
+        assert True, f"所有应用信息匹配成功"
+    else:
+        log.error(f"部分应用信息匹配失败，请查看日志")
+        assert False, f"部分应用信息匹配失败，请查看日志"

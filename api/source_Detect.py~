@@ -43,10 +43,10 @@ def main():
             scaTask_id = response.json()['data']['scaTaskId']
             if hasattr(response.json()['data'], 'socTaskId'):
                 socTask_id = response.json()['data']['socTaskId']
-                ini.set_value('variables', 'socTask_id', f'{socTask_id}')
             try:
                 ini.set_value('variables', 'applicationId', f'{application_id}')
                 ini.set_value('variables', 'scaTaskId', f'{scaTask_id}')
+                ini.set_value('variables', 'socTask_id', f'{socTask_id}')
                 ini.set_value('variables', 'sourceDetectName', f'{sourceDetectName}')
                 ini.set_value('variables', 'sourceTaskId', f'{scaTask_id}')
                 ini.save_config()

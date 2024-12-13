@@ -1,11 +1,7 @@
 import os
 import json
 import re
-from sys import int_info
 
-from api import get_ApplicationInfo
-from common.excel_utils import Excel
-from common.ini_manager import INIManager
 from common.log import Log
 
 BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -122,18 +118,4 @@ class DataUtils:
 
 # 示例用法
 if __name__ == "__main__":
-    int = INIManager('../api/variables.ini')
-    print(BASE_PATH + f'\Reports\源码检测报告.xlsx')
-    excel = Excel('D://供应链场景excel报告.xlsx', "sheet标题及表头测试", BASE_PATH + f'\Reports\源码检测报告.xlsx')
-    report_data = excel.get_ApplicationInfo()
-    case_data = get_ApplicationInfo.get_appInfo(int.get_value('variables', 'sourcetaskid'))
-    data_utils = DataUtils()
-    comparison_results = data_utils.compare_dicts(report_data, case_data)
-
-    for key, equal, report_value, case_value in comparison_results:
-        if equal is None:
-            print(f"Key '{key}' not found in report_data.")
-        elif equal:
-            print(f"Key '{key}': Values are equal ({report_value})")
-        else:
-            print(f"Key '{key}': Values differ - Report: '{report_value}', Case: '{case_value}'")
+    pass

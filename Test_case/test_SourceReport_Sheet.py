@@ -14,7 +14,7 @@ excel = Excel('D://供应链场景excel报告.xlsx', "sheet标题及表头测试
 
 # 下载报告
 def setup_module(module):
-    Get_Report.app()
+    Get_Report.source()
 
 # 清理测试数据
 def teardown_module(module):
