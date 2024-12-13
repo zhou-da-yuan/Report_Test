@@ -12,7 +12,6 @@ BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 log = Log()
 data_utils = DataUtils()
 
-# 清理测试数据
 def test_source_appInfo():
     # Get_Report.source()
     info = InfoGet() # 顺序不能换【要先检测更新了变量数据才能加载新任务id】,导入模块会执行模块级语句，创建对象会执行对象初始化语句
