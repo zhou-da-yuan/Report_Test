@@ -1,7 +1,10 @@
 import os
 import json
 import re
+from sys import int_info
 
+from api import get_ApplicationInfo
+from common.excel_utils import Excel
 from common.ini_manager import INIManager
 from common.log import Log
 
@@ -82,28 +85,51 @@ class JsonUtil:
             result = obj
             for attr in attr_path.split('.'):
                 if isinstance(result, dict):
-                    result = result.get(attr)
+                    result = result.get(    attr)
                 else:
                     result = getattr(result, attr, None)
                 if result is None:
                     raise AttributeError(f"Attribute '{attr}' not found.")
             return result
 
+class DataUtils:
+    def compare_dicts(self, report_data, case_data):
+        """
+        比较两个字典中的值，如果case_data中的键在report_data中存在就测试值是否相等。
+
+        :param report_data: 报告中读取的数据，作为基准进行比较
+        :param case_data: 接口中读取的数据，其键和值与report_data进行对比
+        :return: 包含比较结果的列表，每个元素是一个元组 (key, equal_flag, report_value, case_value)
+                 equal_flag 是 True 或 False 表示值是否相等
+        """
+        results = []
+
+        for key, case_value in case_data.items():
+            if key in report_data:
+                report_value = report_data[key]
+                if report_value == "0.0":report_value = "0"
+                equal = report_value == case_value
+                results.append((key, equal, report_value, case_value))
+            else:
+                # 如果report_data中没有这个键，可以选择记录或者忽略
+                results.append((key, None, "Key not found in report_data", case_value))
+
+        return results
+
 # 示例用法
 if __name__ == "__main__":
-    ini = INIManager(BASE_PATH + r'\api\variables.ini')
-    VOInfo = {'data': {'scaStatusStr': '已完成', 'socStatusStr': '未完成', 'riskLevelStr': '低风险',
-                       'userName': '张三', 'scaDetectTime': '30分钟', 'socDetectTime': '2小时'}}
-    CVLCount = {'data': {'componentNum': 150, 'poisonNum': 2, 'vulNum': 5, 'licenseNum': 3, 'licenseConflictNum': 1}}
-    TaskDetails = {'data': {'detectStartTime': '2024-12-10 10:00:00', 'detectEndTime': '2024-12-10 12:30:00'}}
+    int = INIManager('../api/variables.ini')
+    print(BASE_PATH + f'\Reports\源码检测报告.xlsx')
+    excel = Excel('D://供应链场景excel报告.xlsx', "sheet标题及表头测试", BASE_PATH + f'\Reports\源码检测报告.xlsx')
+    report_data = excel.get_ApplicationInfo()
+    case_data = get_ApplicationInfo.get_appInfo(int.get_value('variables', 'sourcetaskid'))
+    data_utils = DataUtils()
+    comparison_results = data_utils.compare_dicts(report_data, case_data)
 
-    context = {
-        'ini': ini,
-        'VOInfo': VOInfo,
-        'CVLCount': CVLCount,
-        'TaskDetails': TaskDetails
-    }
-
-    json_util = JsonUtil('casedata/ApplicationInfo.json')  # 替换为你的 JSON 文件路径
-    app_info = json_util.read_ApplicationInfo("appInfo",context)
-    print(app_info)
+    for key, equal, report_value, case_value in comparison_results:
+        if equal is None:
+            print(f"Key '{key}' not found in report_data.")
+        elif equal:
+            print(f"Key '{key}': Values are equal ({report_value})")
+        else:
+            print(f"Key '{key}': Values differ - Report: '{report_value}', Case: '{case_value}'")

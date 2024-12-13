@@ -79,7 +79,7 @@ def get_TaskDetails(taskId):
 
 
 # 配置app检测基础应用信息
-def set_appInfo(taskId):
+def get_appInfo(taskId):
     VOInfo = get_VOInfoByTaskId(taskId)
     CVLCount = get_CVLCountTaskId(taskId)
     TaskDetails = get_TaskDetails(taskId)
@@ -93,8 +93,9 @@ def set_appInfo(taskId):
 
     json_util = JsonUtil('casedata/ApplicationInfo.json')  # 替换为你的 JSON 文件路径
     app_info = json_util.read_ApplicationInfo("appInfo", objects)
-    print(app_info)
+    # print(app_info)
+    return app_info
 
 
 if __name__ == '__main__':
-    set_appInfo(612780)
+    get_appInfo(612780)

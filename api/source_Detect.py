@@ -19,13 +19,13 @@ def main():
 
     url = sca_env['base_url'] + ":8443/openapi/v1/app-package/detect-file"
     project_name = ini.get_value('variables', 'projectName')
-    sourceDetectName = f"Report_Test{RandomDataGenerator().numerify(4)}"
+    sourceDetectName = f"sourceDetect{RandomDataGenerator().numerify(4)}"
     payload = {'projectName': project_name,
                'applicationName': f'{sourceDetectName}',
                'applicationVersion': 'test1',
                'applicationDescription': '这个是应用描述',
                'enablePoison': 'true',
-               'isAddSocTask': 'true'
+               'isAddSocTask': 'false'
                }
     files = [
         ('file', ('fastweixin-master.zip', open(file_path, 'rb'), 'application/zip'))
@@ -41,9 +41,11 @@ def main():
             print(f"app上传检测成功：{response.json()}")
             application_id = response.json()['data']['applicationId']
             scaTask_id = response.json()['data']['scaTaskId']
+            socTask_id = response.json()['data']['socTaskId']
             try:
                 ini.set_value('variables', 'applicationId', f'{application_id}')
                 ini.set_value('variables', 'scaTaskId', f'{scaTask_id}')
+                ini.set_value('variables', 'socTask_id', f'{socTask_id}')
                 ini.set_value('variables', 'sourceDetectName', f'{sourceDetectName}')
                 ini.set_value('variables', 'sourceTaskId', f'{scaTask_id}')
                 ini.save_config()

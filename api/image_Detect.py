@@ -19,7 +19,7 @@ def main():
 
     url = sca_env['base_url'] + ":8443/openapi/v1/image/detect-file"
     project_name = ini.get_value('variables', 'projectName')
-    imageDetectName = f"Report_Test{RandomDataGenerator().numerify(4)}"
+    imageDetectName = f"imageDetect{RandomDataGenerator().numerify(4)}"
     payload = {'projectName': project_name,
                'applicationName': imageDetectName,
                'applicationVersion': '1.0',

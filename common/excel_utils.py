@@ -105,9 +105,11 @@ class Excel:
                 for key, value in zip(selected_rows[0], selected_rows[1])
             }
             self.log.info(f"获取报告应用信息成功: {Info_dict}")
+            print("获取报告应用信息成功")
             return Info_dict
         except Exception as e:
             self.log.error(f"获取报告应用信息失败: {e}")
+            print("获取报告应用信息失败")
             return None
 
 
@@ -129,4 +131,5 @@ def str_to_list(str_val):
 
 if __name__ == '__main__':
     excel_instance = Excel('D://供应链场景excel报告.xlsx', "sheet标题及表头测试",report_file_path=r"D:\sca_load\【应用报告】Report_Test7214@1.0-20241212162739.xlsx")
-    print(excel_instance.get_ApplicationInfo())
+    print(excel_instance.get_ApplicationInfo()["恶意组件数"])
+    print(type(excel_instance.get_ApplicationInfo()["恶意组件数"]))

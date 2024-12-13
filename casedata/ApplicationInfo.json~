@@ -8,7 +8,7 @@
     "供应链场景": "应用包审查分析",
     "项目负责人": "xmirror",
     "检测状态": "组件依赖分析:{VOInfo.data.scaStatusStr}\n代码溯源分析:{VOInfo.data.socStatusStr}",
-    "恶意组件分析": "已开启",
+    "恶意组件分析": "开启",
     "可达性分析": "未开启",
     "风险等级": "{VOInfo.data.riskLevelStr}",
     "组件数": "{CVLCount.data.componentNum}",

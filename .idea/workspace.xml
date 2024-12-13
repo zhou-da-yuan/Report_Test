@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="142c5c98-611d-465a-a3fb-df8525746c36" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/casedata/ApplicationInfo.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/binary_Detect.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binary_Detect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/create_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/create_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/download_Report.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/download_Report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/get_ApplicationInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/get_ApplicationInfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/image_Detect.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/image_Detect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/source_Detect.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/source_Detect.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/variables.ini" beforeDir="false" afterPath="$PROJECT_DIR$/api/variables.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/casedata/appInfo.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casedata/ApplicationInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/casedata/ApplicationInfo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/data_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/data_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/excel_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/excel_utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,6 +83,7 @@
     "Python.ini_manager.executor": "Run",
     "Python.log.executor": "Run",
     "Python.main.executor": "Run",
+    "Python.source_Detect.executor": "Run",
     "Python.yaml_utils.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.codeium.enabled": "true",
