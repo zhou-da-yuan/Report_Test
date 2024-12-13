@@ -18,7 +18,7 @@
     "许可证冲突数": "{CVLCount.data.licenseConflictNum}",
     "添加人": "{VOInfo.data.userName}",
     "开始检测时间": "{TaskDetails.data.detectStartTime}",
-    "检测完成时间": "{TaskDetails.data.detectEndTime.}",
+    "检测完成时间": "{TaskDetails.data.detectEndTime}",
     "检测时长": "组件: {VOInfo.data.scaDetectTime}\n代码: {VOInfo.data.socDetectTime}",
     "应用描述": "这个是应用描述"
   }

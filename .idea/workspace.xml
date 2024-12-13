@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="142c5c98-611d-465a-a3fb-df8525746c36" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/casedata/ApplicationInfo.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app_Detect.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/app_Detect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/get_ApplicationInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/get_ApplicationInfo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/variables.ini" beforeDir="false" afterPath="$PROJECT_DIR$/api/variables.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/casedata/appInfo.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/common/excel_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/excel_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,18 +27,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "zhou-da-yuan"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;zhou-da-yuan&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/zhou-da-yuan/Report_Test",
-    "accountId": "65067061-88d9-46ec-a737-874609dd0e19"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/zhou-da-yuan/Report_Test&quot;,
+    &quot;accountId&quot;: &quot;65067061-88d9-46ec-a737-874609dd0e19&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///获取应用信息成功" root0="SKIP_INSPECTION" />
   </component>
@@ -66,6 +67,7 @@
     "Python.conftest.executor": "Run",
     "Python.create_project.executor": "Run",
     "Python.create_report.executor": "Run",
+    "Python.data_utils.executor": "Run",
     "Python.delete_Report.executor": "Run",
     "Python.delete_project.executor": "Run",
     "Python.download_Report.executor": "Run",
@@ -78,6 +80,7 @@
     "Python.main.executor": "Run",
     "Python.yaml_utils.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.codeium.enabled": "true",
     "com.codeium.snoozedEndTime": "0",
     "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/Users/admin/PycharmProjects/Report_Test/Packages",
@@ -122,7 +125,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-d7ad00fb9fc3-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23726.102" />
+        <option value="bundled-python-sdk-6a3326d57233-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.24807.21" />
       </set>
     </attachedChunks>
   </component>

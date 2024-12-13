@@ -1,5 +1,6 @@
 import os
 
+from common.data_utils import JsonUtil
 from common.request import RunMethod
 from common.log import Log
 from common.ini_manager import INIManager
@@ -22,15 +23,15 @@ def get_VOInfoByTaskId(taskId):
     try:
         response = RunMethod().api_run("GET", url, headers=headers)
         if response.json()['code'] == 0:
-            log.info("获取应用信息成功")
-            print(f"获取应用信息成功{response.json()}")
+            log.info("获取VOIn信息成功")
+            print(f"获取VOIn信息成功{response.json()}")
             return response.json()
         else:
-            log.error("请求失败")
-            print(f"请求失败{response.json()}")
+            log.error("VOIn请求失败")
+            print(f"VOIn请求失败{response.json()}")
 
     except Exception as e:
-        log.error("获取应用信息失败")
+        log.error("获取VOIn信息失败")
         print(e)
 
 # web接口获取检测组件、漏洞、许可证统计信息
@@ -44,15 +45,15 @@ def get_CVLCountTaskId(taskId):
     try:
         response = RunMethod().api_run("GET", url, headers=headers)
         if response.json()['code'] == 0:
-            log.info("获取应用CVL信息成功")
-            print(f"获取应用CVL信息成功{response.json()}")
+            log.info("获取CVLCount信息成功")
+            print(f"获取CVLCount信息成功{response.json()}")
             return response.json()
         else:
-            log.error("CVL请求失败")
-            print(f"CVL请求失败{response.json()}")
+            log.error("CVLCount请求失败")
+            print(f"CVLCount请求失败{response.json()}")
 
     except Exception as e:
-        log.error("获取应用CVL信息失败")
+        log.error("获取CVLCountL信息失败")
         print(e)
 
 # openapi接口根据任务id获取任务详情
@@ -65,15 +66,15 @@ def get_TaskDetails(taskId):
     try:
         response = RunMethod().api_run("GET", url, headers=headers)
         if response.json()['code'] == 0:
-            log.info("获取任务详情成功")
-            print(f"获取任务详情成功{response.json()}")
+            log.info("获取TaskDetails情成功")
+            print(f"获取TaskDetails成功{response.json()}")
             return response.json()
         else:
-            log.error("获取任务详情请求失败")
-            print(f"获取任务详情请求失败{response.json()}")
+            log.error("获取TaskDetails请求失败")
+            print(f"获取TaskDetails请求失败{response.json()}")
 
     except Exception as e:
-        log.error("获取任务详情失败")
+        log.error("获取TaskDetails失败")
         print(e)
 
 
@@ -82,24 +83,18 @@ def set_appInfo(taskId):
     VOInfo = get_VOInfoByTaskId(taskId)
     CVLCount = get_CVLCountTaskId(taskId)
     TaskDetails = get_TaskDetails(taskId)
-    case_data = { "应用名称": ini.get_value('variables', 'appDetectName'),"版本号": "test1",
-                 "项目名称": ini.get_value('variables', 'projectname'), "应用资产属性":"有效资产",
-                  "来源":"本地文件","供应链场景":"应用包审查分析","项目负责人":"xmirror",
-                  "检测状态":f"组件依赖分析:{VOInfo["data"]["scaStatusStr"]}\n代码溯源分析:{VOInfo["data"]["socStatusStr"]}",
-                  "恶意组件分析":"开启","可达性分析":"未开启",
-                  "风险等级":f"{VOInfo["data"]["riskLevelStr"]}",
-                  "组件数":f"{CVLCount['data']['componentNum']}",
-                  "恶意组件数":f"{CVLCount['data']['poisonNum']}",
-                  "漏洞数":f"{CVLCount['data']['vulNum']}",
-                  "许可证数":f"{CVLCount['data']['licenseNum']}",
-                  "许可证冲突数":f"{CVLCount['data']['licenseConflictNum']}",
-                  "添加人":f"{VOInfo["data"]["userName"]}",
-                  "开始检测时间":f"{TaskDetails['data']['detectStartTime']}",
-                  "检测完成时间":f"{TaskDetails['data']['detectEndTime']}",
-                  "检测时长":f"组件: {VOInfo["data"]["scaDetectTime"]}\n代码: {VOInfo["data"]["socDetectTime"]}",
-                  "应用描述":"这个是应用描述"}
-    print(case_data)
+
+    objects = {
+        'ini': ini,
+        'VOInfo': VOInfo,
+        'CVLCount': CVLCount,
+        'TaskDetails': TaskDetails
+    }
+
+    json_util = JsonUtil('casedata/ApplicationInfo.json')  # 替换为你的 JSON 文件路径
+    app_info = json_util.read_ApplicationInfo("appInfo", objects)
+    print(app_info)
 
 
 if __name__ == '__main__':
-    set_appInfo()
+    set_appInfo(612780)

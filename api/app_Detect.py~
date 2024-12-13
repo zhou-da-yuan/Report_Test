@@ -22,7 +22,7 @@ def main():
     appDetectName = f"Report_Test{RandomDataGenerator().numerify(4)}"
     payload = {'projectName': project_name,
                'applicationName': f'{appDetectName}',
-               'applicationVersion': '1.0',
+               'applicationVersion': '123',
                'applicationDescription': '这个是应用描述',
                'enablePoison': 'true',
                'isAddSocTask': 'true'

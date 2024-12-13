@@ -71,13 +71,13 @@ class Excel:
         self.log.info(f"工作表 {sheet_name} 的首行表头读取成功: {headers}")
         return headers
 
-    def get_ApplicationInfo(self, report_file_path=None, sheet_name="应用信息", row_indices=None, date_format="%Y-%m-%d %H:%M:%S"):
+    def get_ApplicationInfo(self, report_file_path=None, sheet_name=None, row_indices=None, date_format="%Y-%m-%d %H:%M:%S"):
         """
         获取报告应用信息内容，并将日期时间格式化为指定格式。
 
-        :param report_file_path: Excel 文件路径。如果未提供，则使用初始化时提供的 case_file_path。
-        :param sheet_name: 工作表名称。如果未提供，则使用初始化时提供的 case_file_sheet。
-        :param row_indices: 行索引列表（基于0）。
+        :param report_file_path: Excel 报告文件路径。如果未提供，则使用初始化时提供的 report_file_path。
+        :param sheet_name: 工作表名称。如果未提供，则为 应用信息。
+        :param row_indices: 行索引列表（基于1）默认为 [1, 2]。
         :param date_format: 日期时间格式，默认是 "%Y-%m-%d %H:%M:%S"。
         :return: 包含指定行内容的字典。
         """
@@ -89,22 +89,26 @@ class Excel:
             sheet_name = "应用信息"
 
         # 加载工作簿并选择指定的工作表
-        wb = load_workbook(filename=report_file_path, data_only=True)  # 使用 data_only=True 来确保只读取计算后的值
-        ws = wb[sheet_name]
+        try:
+            wb = load_workbook(filename=report_file_path, data_only=True)  # 使用 data_only=True 来确保只读取计算后的值
+            ws = wb[sheet_name]
 
-        # 获取指定行的内容
-        selected_rows = []
-        for idx in row_indices:
-            row_data = [cell.value for cell in ws[idx]]  # 行索引从1开始
-            selected_rows.append(row_data)
+            # 获取指定行的内容
+            selected_rows = []
+            for idx in row_indices:
+                row_data = [cell.value for cell in ws[idx]]  # 行索引从1开始
+                selected_rows.append(row_data)
 
-        # 格式化日期时间字段并创建字典
-        AppInfo_dict = {
-            key: value.strftime(date_format) if isinstance(value, datetime) else str(value)
-            for key, value in zip(selected_rows[0], selected_rows[1])
-        }
-
-        return AppInfo_dict
+            # 格式化日期时间字段并创建字典
+            Info_dict = {
+                key: value.strftime(date_format) if isinstance(value, datetime) else str(value)
+                for key, value in zip(selected_rows[0], selected_rows[1])
+            }
+            self.log.info(f"获取报告应用信息成功: {Info_dict}")
+            return Info_dict
+        except Exception as e:
+            self.log.error(f"获取报告应用信息失败: {e}")
+            return None
 
 
     def close(self):

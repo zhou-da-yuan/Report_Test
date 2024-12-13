@@ -15,20 +15,19 @@ def main():
     sca_env = config.get_config()
     ini = INIManager(BASE_PATH + r'\api\variables.ini')
 
-    file_path = os.path.join(BASE_PATH, r'Packages\fastweixin-master.zip')
+    file_path = os.path.join(BASE_PATH, r'Packages\curl.zst')
 
-    url = sca_env['base_url'] + ":8443/openapi/v1/app-package/detect-file"
+    url = sca_env['base_url'] + ":8443/openapi/v1/binary/detect-file"
     project_name = ini.get_value('variables', 'projectName')
-    appDetectName = f"Report_Test{RandomDataGenerator().numerify(4)}"
     payload = {'projectName': project_name,
-               'applicationName': f'{appDetectName}',
-               'applicationVersion': 'test1',
+               'applicationName': f'Report_Test{RandomDataGenerator().numerify(4)}',
+               'applicationVersion': '1.0',
                'applicationDescription': '这个是应用描述',
                'enablePoison': 'true',
-               'isAddSocTask': 'true'
+               'isAddRvcTask': 1
                }
     files = [
-        ('file', ('fastweixin-master.zip', open(file_path, 'rb'), 'application/zip'))
+        ('file', ('curl.zst', open(file_path, 'rb'), 'application/zip'))
     ]
     headers = {
         'OpenApiUserToken': sca_env['OpenApiUserToken'],
@@ -37,25 +36,24 @@ def main():
         response = RunMethod().api_run("POST", url, headers=headers, data=payload, files=files)
 
         if response.json()['code'] == 0:
-            log.info(f"app上传检测成功：{response.json()}")
-            print(f"app上传检测成功：{response.json()}")
+            log.info(f"binary上传检测成功：{response.json()}")
+            print(f"binary上传检测成功：{response.json()}")
             application_id = response.json()['data']['applicationId']
             scaTask_id = response.json()['data']['scaTaskId']
             try:
                 ini.set_value('variables', 'applicationId', f'{application_id}')
                 ini.set_value('variables', 'scaTaskId', f'{scaTask_id}')
-                ini.set_value('variables', 'appDetectName', f'{appDetectName}')
                 ini.save_config()
-                log.info(f"applicationId、scaTaskId变量写入成功-{application_id}、{scaTask_id}")
-                print(f"变量写入成功")
+                log.info(f"applicationId-{application_id}、scaTaskId-{scaTask_id}变量写入成功")
+                print(f"applicationId-{application_id}、scaTaskId-{scaTask_id}变量写入成功")
             except Exception as e:
                 log.error(f"写入applicationId、scaTaskId变量失败-{e}")
         else:
-            log.error(f"app上传检测失败：{response.json()}")
+            log.error(f"binary上传检测失败：{response.json()}")
             print("检测项目名称" + project_name)
     except Exception as e:
-        log.error(f"app上传检测接口请求错误：{e}")
-        print(f"app上传检测接口请求错误：{e}")
+        log.error(f"binary上传检测接口请求错误：{e}")
+        print(f"binary上传检测接口请求错误：{e}")
 
 
 if __name__ == '__main__':

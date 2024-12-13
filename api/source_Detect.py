@@ -15,20 +15,20 @@ def main():
     sca_env = config.get_config()
     ini = INIManager(BASE_PATH + r'\api\variables.ini')
 
-    file_path = os.path.join(BASE_PATH, r'Packages\alpine.tar')
+    file_path = os.path.join(BASE_PATH, r'Packages\fastweixin-master.zip')
 
-    url = sca_env['base_url'] + ":8443/openapi/v1/image/detect-file"
+    url = sca_env['base_url'] + ":8443/openapi/v1/app-package/detect-file"
     project_name = ini.get_value('variables', 'projectName')
+    sourceDetectName = f"Report_Test{RandomDataGenerator().numerify(4)}"
     payload = {'projectName': project_name,
-               'applicationName': f'Report_Test{RandomDataGenerator().numerify(4)}',
-               'applicationVersion': '1.0',
+               'applicationName': f'{sourceDetectName}',
+               'applicationVersion': 'test1',
                'applicationDescription': '这个是应用描述',
                'enablePoison': 'true',
-               'sensitive': 'true'
+               'isAddSocTask': 'true'
                }
-    log.debug(payload)
     files = [
-        ('file', ('alpine.tar', open(file_path, 'rb'), 'application/x-tar'))
+        ('file', ('fastweixin-master.zip', open(file_path, 'rb'), 'application/zip'))
     ]
     headers = {
         'OpenApiUserToken': sca_env['OpenApiUserToken'],
@@ -37,24 +37,26 @@ def main():
         response = RunMethod().api_run("POST", url, headers=headers, data=payload, files=files)
 
         if response.json()['code'] == 0:
-            log.info(f"image上传检测成功：{response.json()}")
-            print(f"image上传检测成功：{response.json()}")
+            log.info(f"app上传检测成功：{response.json()}")
+            print(f"app上传检测成功：{response.json()}")
             application_id = response.json()['data']['applicationId']
             scaTask_id = response.json()['data']['scaTaskId']
             try:
                 ini.set_value('variables', 'applicationId', f'{application_id}')
                 ini.set_value('variables', 'scaTaskId', f'{scaTask_id}')
+                ini.set_value('variables', 'sourceDetectName', f'{sourceDetectName}')
+                ini.set_value('variables', 'sourceTaskId', f'{scaTask_id}')
                 ini.save_config()
                 log.info(f"applicationId、scaTaskId变量写入成功-{application_id}、{scaTask_id}")
                 print(f"变量写入成功")
             except Exception as e:
                 log.error(f"写入applicationId、scaTaskId变量失败-{e}")
         else:
-            log.error(f"image上传检测失败：{response.json()}")
+            log.error(f"app上传检测失败：{response.json()}")
             print("检测项目名称" + project_name)
     except Exception as e:
-        log.error(f"image上传检测接口请求错误：{e}")
-        print(f"image上传检测接口请求错误：{e}")
+        log.error(f"app上传检测接口请求错误：{e}")
+        print(f"app上传检测接口请求错误：{e}")
 
 
 if __name__ == '__main__':

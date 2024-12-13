@@ -19,8 +19,9 @@ def main():
 
     url = sca_env['base_url'] + ":8443/openapi/v1/binary/detect-file"
     project_name = ini.get_value('variables', 'projectName')
+    binaryDetectName = f"Report_Test{RandomDataGenerator().numerify(4)}"
     payload = {'projectName': project_name,
-               'applicationName': f'Report_Test{RandomDataGenerator().numerify(4)}',
+               'applicationName': binaryDetectName,
                'applicationVersion': '1.0',
                'applicationDescription': '这个是应用描述',
                'enablePoison': 'true',
@@ -43,6 +44,8 @@ def main():
             try:
                 ini.set_value('variables', 'applicationId', f'{application_id}')
                 ini.set_value('variables', 'scaTaskId', f'{scaTask_id}')
+                ini.set_value('variables', 'binaryDetectName', f'{binaryDetectName}')
+                ini.set_value('variables', 'binaryTaskId', f'{scaTask_id}')
                 ini.save_config()
                 log.info(f"applicationId-{application_id}、scaTaskId-{scaTask_id}变量写入成功")
                 print(f"applicationId-{application_id}、scaTaskId-{scaTask_id}变量写入成功")
