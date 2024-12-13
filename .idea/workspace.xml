@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="142c5c98-611d-465a-a3fb-df8525746c36" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/app_Detect.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/app_Detect.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/variables.ini" beforeDir="false" afterPath="$PROJECT_DIR$/api/variables.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/excel_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/excel_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +38,9 @@
     "accountId": "65067061-88d9-46ec-a737-874609dd0e19"
   }
 }]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///获取应用信息成功" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -66,9 +71,11 @@
     "Python.download_Report.executor": "Run",
     "Python.excel.executor": "Run",
     "Python.excel_utils.executor": "Run",
+    "Python.get_ApplicationInfo.executor": "Run",
     "Python.image_Detect.executor": "Run",
     "Python.ini_manager.executor": "Run",
     "Python.log.executor": "Run",
+    "Python.main.executor": "Run",
     "Python.yaml_utils.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.codeium.snoozedEndTime": "0",

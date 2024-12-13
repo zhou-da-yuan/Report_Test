@@ -1,0 +1,17 @@
+appInfo:
+  "应用名称":f"ini.get_value('variables', 'appDetectName'),"版本号": "test1",
+                                                            "项目名称": ini.get_value('variables', 'projectname'), "应用资产属性":"有效资产",
+                                                                          "来源":"本地文件","供应链场景":"应用包审查分析","项目负责人":"xmirror",
+                                                                          "检测状态":f"组件依赖分析:{VOInfo["data"]["scaStatusStr"]}\n代码溯源分析:{VOInfo["data"]["socStatusStr"]}",
+                                                                          "恶意组件分析":"开启","可达性分析":"未开启",
+                                                                          "风险等级":f"{VOInfo["data"]["riskLevelStr"]}",
+                                                                          "组件数":f"{CVLCount['data']['componentNum']}",
+                                                                          "恶意组件数":f"{CVLCount['data']['poisonNum']}",
+                                                                          "漏洞数":f"{CVLCount['data']['vulNum']}",
+                                                                          "许可证数":f"{CVLCount['data']['licenseNum']}",
+                                                                          "许可证冲突数":f"{CVLCount['data']['licenseConflictNum']}",
+                                                                          "添加人":f"{VOInfo["data"]["userName"]}",
+                                                                          "开始检测时间":f"{TaskDetails['data']['detectStartTime']}",
+                                                                          "检测完成时间":f"{TaskDetails['data']['detectEndTime']}",
+                                                                          "检测时长":f"组件: { VOInfo[ "data" ][ "scaDetectTime" ] }\n代码: { VOInfo[ "data" ][ "socDetectTime" ] }",
+                    "应用描述":"这个是应用描述"
