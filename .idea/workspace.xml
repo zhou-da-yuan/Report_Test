@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="142c5c98-611d-465a-a3fb-df8525746c36" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/test_Report_ApplicationInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/test_Report_ApplicationInfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case1_ReportSheet/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case1_ReportSheet/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/test_BinaryReport_Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case1_ReportSheet/test_BinaryReport_Sheet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/test_ImageReport_Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case1_ReportSheet/test_ImageReport_Sheet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/test_SourceReport_Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case1_ReportSheet/test_SourceReport_Sheet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case_info/test_Report_ApplicationInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case2_ReportInfo/test_Report_ApplicationInfo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/variables.ini" beforeDir="false" afterPath="$PROJECT_DIR$/api/variables.ini" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,6 +96,7 @@
       <recent name="C:\Users\admin\PycharmProjects\Report_Test\Packages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\admin\PycharmProjects\Report_Test\Test_case_info" />
       <recent name="C:\Users\admin\PycharmProjects\Report_Test\Reports" />
       <recent name="C:\Users\admin\PycharmProjects\Report_Test\api" />
       <recent name="C:\Users\admin\PycharmProjects\Report_Test\Test_case" />

@@ -12,11 +12,9 @@ BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 log = Log()
 data_utils = DataUtils()
 
-@pytest.mark.run(after="test_sheet_headers")
 def test_source_appInfo():
     # Get_Report.source()
-    info = InfoGet() # 顺序不能换【要先检测更新了变量数据才能加载新任务id】,导入模块会执行模块级语句，创建对象会执行对象初始化语句
-
+    info = InfoGet()
     excel = Excel('D://供应链场景excel报告.xlsx', "sheet标题及表头测试", BASE_PATH + r'\Reports\源码检测报告.xlsx')
 
     report_data = excel.get_ApplicationInfo()

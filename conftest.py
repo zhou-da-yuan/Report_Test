@@ -1,5 +1,3 @@
-from logging import LogRecord
-
 import pytest
 
 from Reports import Delete_Report
