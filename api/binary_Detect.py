@@ -22,7 +22,7 @@ def main():
     binaryDetectName = f"binaryDetect{RandomDataGenerator().numerify(4)}"
     payload = {'projectName': project_name,
                'applicationName': binaryDetectName,
-               'applicationVersion': '1.0',
+               'applicationVersion': 'test1',
                'applicationDescription': '这个是应用描述',
                'enablePoison': 'true',
                'isAddRvcTask': 1

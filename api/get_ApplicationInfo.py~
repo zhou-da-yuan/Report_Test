@@ -82,7 +82,7 @@ class InfoGet:
     # 初始化获取接口信息
     def __init__(self,taskId_type):
         ini = INIManager(BASE_PATH + r'\api\variables.ini')
-        self.taskId = ini.get_value('variables', taskId_type)
+        self.taskId = ini.get_value('variables', {taskId_type})
 
         VOInfo = get_VOInfoByTaskId(self.taskId)
         CVLCount = get_CVLCountTaskId(self.taskId)

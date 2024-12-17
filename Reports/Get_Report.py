@@ -105,4 +105,4 @@ def image():
 
 if __name__ == "__main__":
     # 运行 app 函数
-    image()
+    deleteProject()

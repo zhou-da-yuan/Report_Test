@@ -1,7 +1,7 @@
 {
-  "appInfo": {
+  "sourceInfo": {
     "应用名称": "{ini.get_value('variables', 'sourcedetectname')}",
-    "版本号": "test12",
+    "版本号": "test1",
     "所属项目": "{ini.get_value('variables', 'projectname')}",
     "应用资产属性": "有效资产",
     "来源": "本地文件",
@@ -23,7 +23,7 @@
     "检测时长": "{VOInfo.data.scaDetectTime}",
     "应用描述": "这个是应用描述"
   },
-  "appInfo_addSoc": {
+  "sourceInfo_addSoc": {
     "应用名称": "{ini.get_value('variables', 'sourcedetectname')}",
     "版本号": "test1",
     "所属项目": "{ini.get_value('variables', 'projectname')}",
@@ -44,6 +44,48 @@
     "开始检测时间": "{TaskDetails.data.detectStartTime}",
     "检测完成时间": "{TaskDetails.data.detectEndTime}",
     "检测时长": "组件: {VOInfo.data.scaDetectTime}\n代码: {VOInfo.data.socDetectTime}",
+    "应用描述": "这个是应用描述"
+  },
+  "binaryInfo": {
+    "应用名称": "{ini.get_value('variables', 'binarydetectname')}",
+    "版本号": "test1",
+    "所属项目": "{ini.get_value('variables', 'projectname')}",
+    "应用资产属性": "有效资产",
+    "来源": "本地文件",
+    "供应链场景": "二进制成分分析",
+    "项目负责人": "xmirror",
+    "恶意组件分析": "已开启",
+    "可达性分析": "已开启",
+    "风险等级": "{VOInfo.data.riskLevelStr}",
+    "组件数": "{CVLCount.data.componentNum}",
+    "恶意组件数": "{CVLCount.data.poisonNum}",
+    "漏洞数": "{CVLCount.data.vulNum}",
+    "许可证数": "{CVLCount.data.licenseNum}",
+    "许可证冲突数": "{CVLCount.data.licenseConflictNum}",
+    "添加人": "{VOInfo.data.userName}",
+    "开始检测时间": "{TaskDetails.data.detectStartTime}",
+    "检测完成时间": "{TaskDetails.data.detectEndTime}",
+    "检测时长": "{VOInfo.data.scaDetectTime}",
+    "应用描述": "这个是应用描述"
+  },
+  "imageInfo": {
+    "应用名称": "{ini.get_value('variables', 'imagedetectname')}",
+    "版本号": "test1",
+    "所属项目": "{ini.get_value('variables', 'projectname')}",
+    "应用资产属性": "有效资产",
+    "来源": "本地上传",
+    "供应链场景": "容器镜像安全扫描",
+    "项目负责人": "xmirror",
+    "恶意组件分析": "未开启",
+    "风险等级": "{VOInfo.data.riskLevelStr}",
+    "恶意组件数": "{CVLCount.data.poisonNum}",
+    "漏洞数": "{CVLCount.data.vulNum}",
+    "许可证数": "{CVLCount.data.licenseNum}",
+    "许可证冲突数": "{CVLCount.data.licenseConflictNum}",
+    "添加人": "{VOInfo.data.userName}",
+    "开始检测时间": "{TaskDetails.data.detectStartTime}",
+    "检测完成时间": "{TaskDetails.data.detectEndTime}",
+    "检测时长": "{VOInfo.data.scaDetectTime}",
     "应用描述": "这个是应用描述"
   }
 }

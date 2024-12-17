@@ -22,7 +22,7 @@ def main():
     imageDetectName = f"imageDetect{RandomDataGenerator().numerify(4)}"
     payload = {'projectName': project_name,
                'applicationName': imageDetectName,
-               'applicationVersion': '1.0',
+               'applicationVersion': 'test1',
                'applicationDescription': '这个是应用描述',
                'enablePoison': 'true',
                'sensitive': 'true'

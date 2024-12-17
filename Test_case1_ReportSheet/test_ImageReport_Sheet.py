@@ -25,12 +25,17 @@ class TestSheet:
     # 测试工作表标题
     def test_sheets_title(self):
         try:
-            df = excel.read_caseData('镜像检测', 'sheet标题')
-            if df:
+            case_sheets = excel.read_caseData('镜像检测', 'sheet标题')
+            if case_sheets:
                 report_sheets = excel.read_report_sheetNames()
-                if set(df) != set(report_sheets):
-                    excel.log.info("Sheet标题数据匹配失败！")
-                    assert False, "数据不匹配"
+                if case_sheets != report_sheets:
+                    diff = set(case_sheets).symmetric_difference(set(report_sheets))
+                    if len(diff) != 0:
+                        log.error(f"镜像检测报告-sheet标题与用例数据不匹配！diff:{diff}")
+                        assert False, f"数据不匹配-diff:{diff}"
+                    else:
+                        log.error(f"镜像检测报告-sheet标题与用例顺序不匹配！")
+                        assert False, f"顺序不匹配"
                 log.info("Sheet标题数据匹配成功！")
             else:
                 pytest.fail("没有找到对应的测试用例数据。")
@@ -45,9 +50,14 @@ class TestSheet:
             case_data = excel.read_caseData('镜像检测', sheet_name)
             if case_data :
                 headers = excel.read_report_headers(sheet_name)
-                if set(case_data) != set(headers):
-                    log.info(f"工作表 {sheet_name} 的表头与用例数据不匹配！")
-                    assert False, "数据不匹配"
+                if case_data != headers:
+                    diff = set(case_data).symmetric_difference(set(headers))
+                    if len(diff) != 0:
+                        log.error(f"工作表 {sheet_name} 的表头与用例数据不匹配！diff:{diff}")
+                        assert False, f"数据不匹配-diff:{diff}"
+                    else:
+                        log.error(f"工作表 {sheet_name} 的表头与用例顺序不匹配！")
+                        assert False, f"顺序不匹配"
                 log.info(f"工作表 {sheet_name} 的表头与用例数据匹配成功！")
             else:
                 pytest.fail("没有找到对应的测试用例数据。")

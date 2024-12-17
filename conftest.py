@@ -1,5 +1,4 @@
 import pytest
-
 from Reports import Delete_Report
 from common.log import Log
 
@@ -18,12 +17,12 @@ def pytest_runtest_makereport(item, call):
 
     # 如果任何一个测试失败，则设置标志
     if rep.when == "call" and rep.failed:
-        item.config.cache.set("test_failed", True)
+        item.session.test_failed = True
+        log.error(f"Test {item.nodeid} failed")
 
 # 使用 pytest_sessionfinish 钩子来在测试会话结束时执行后置函数
 def pytest_sessionfinish(session, exitstatus):
-    if not session.config.cache.get("test_failed", False):
-        # 所有用例都成功，执行后置函数
+    if not getattr(session, 'test_failed', True):  # 默认值为True以确保首次运行时不会误判
         delete_reports()
         log.info("所有用例通过，已清理报告")
     else:
