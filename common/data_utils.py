@@ -57,6 +57,7 @@ class JsonUtil:
         """
         解析并执行占位符表达式。
         支持方法调用（如 ini.get_value）和属性访问（如 VOInfo.data.scaStatusStr[0]）。
+        如果最终结果为空或 None，则返回空数据而不抛出异常。
         """
         parts = expression.split('.')
         obj_name = parts[0]
@@ -66,7 +67,7 @@ class JsonUtil:
             raise ValueError(f"Object '{obj_name}' not found in objects.")
 
         if len(parts) == 1:  # 如果只有对象名，返回对象本身
-            return obj
+            return obj if obj is not None else ""
 
         # 对于方法调用，例如 ini.get_value('variables', 'appDetectName')
         if '(' in parts[1]:
@@ -75,12 +76,11 @@ class JsonUtil:
             args = [arg.strip().strip("'").strip('"') for arg in args_part.split(',')] if args_part else []
             if hasattr(obj, method_call):  # 检查对象是否有该方法。
                 method = getattr(obj, method_call)  # 获取方法引用。
-                return method(*args)  # 调用方法并返回结果。
+                result = method(*args)  # 调用方法并返回结果。
             else:
                 raise AttributeError(f"Method '{method_call}' not found on object '{obj_name}'.")
-
-        # 对于属性访问，例如 VOInfo.data.scaStatusStr 或 VOInfo.data.scaStatusStr[0]
         else:
+            # 对于属性访问，例如 VOInfo.data.scaStatusStr 或 VOInfo.data.scaStatusStr[0]
             attr_path = '.'.join(parts[1:])
             result = obj
             for part in attr_path.split('.'):
@@ -102,7 +102,7 @@ class JsonUtil:
                         raise AttributeError(f"Attribute '{attr}' not found on object '{obj_name}'.")
 
                     if result is None:
-                        raise AttributeError(f"Attribute '{attr}' is None and cannot be indexed.")
+                        break
 
                     if not isinstance(result, list) or index < 0 or index >= len(result):
                         raise IndexError(f"Index '{index}' out of range for attribute '{attr}'.")
@@ -118,9 +118,13 @@ class JsonUtil:
                         raise AttributeError(f"Attribute '{part}' not found on object '{obj_name}'.")
 
                     if result is None:
-                        raise AttributeError(f"Attribute '{part}' not found on object '{obj_name}'.")
+                        break
 
-            return result
+        # 如果结果是 None 或者是空的集合类型，返回空字符串
+        if result is None or (isinstance(result, (str, list, dict, set)) and not result):
+            return ""
+
+        return result
 
 
 class DataUtils:
@@ -152,7 +156,6 @@ class DataUtils:
         return results
 
     def riskLevel_Trans(self, data):
-
         """
         将风险等级ID转换为对应的描述性字符串。
 
@@ -254,6 +257,9 @@ class DataUtils:
         抛出:
             ValueError: 如果输入数据格式不正确或解析失败。
         """
+        if data_str == '':
+            log.info("该组件无许可证")
+            return ""
         try:
             # 将字符串转换为列表
             data = ast.literal_eval(data_str)
@@ -357,26 +363,29 @@ class DataUtils:
             ValueError: 如果输入数据格式不正确或解析失败。
         """
         try:
-            # 将字符串中的单引号替换为双引号以符合 JSON 规范
-            data_str = data_str.replace("'", '"')
-
-            # 将字符串转换为字典
-            data = json.loads(data_str)
+            # 尝试使用 ast.literal_eval 安全解析 Python 字面量表达式
+            data = ast.literal_eval(data_str)
             if not isinstance(data, dict) or 'vulList' not in data:
                 raise ValueError("输入不是一个有效的漏洞数据字符串。")
-        except (ValueError, json.JSONDecodeError) as e:
+        except (ValueError, SyntaxError) as e:
             raise ValueError(f"无效的漏洞数据字符串: {e}")
 
         # 提取漏洞数据
-        vul_list = data.get('vulList', [])
+        vul_list = data.get('vulList')
+
+        if vul_list is None:
+            log.debug("该组件无漏洞")
+            return "0(严重:0;高危:0;中危:0;低危:0)"
+
+        if not isinstance(vul_list, list):
+            raise ValueError("vulList 不是一个有效的列表。")
 
         # 定义严重程度映射
         severity_map = {
             1: '严重',
             2: '高危',
             3: '中危',
-            4: '低危',
-            5: '无漏洞'
+            4: '低危'
         }
 
         # 初始化统计变量
@@ -391,7 +400,7 @@ class DataUtils:
 
         # 确保至少有一个严重程度的计数大于 0
         non_zero_severities = [f"{severity}:{count}" for severity, count in severity_counts.items() if count > 0]
-        formatted_output = f"{total_vul_count}({';'.join(non_zero_severities)})" if non_zero_severities else f"{total_vul_count}(11)"
+        formatted_output = f"{total_vul_count}({';'.join(non_zero_severities)})" if non_zero_severities else f"{total_vul_count}(严重:0;高危:0;中危:0;低危:0)"
 
         return formatted_output
 
@@ -409,6 +418,9 @@ class DataUtils:
         抛出:
             ValueError: 如果输入数据格式不正确或解析失败。
         """
+        if data_str == '' or data_str is None:
+            log.debug("该组件无漏洞")
+            return ""
         try:
             # 使用 ast.literal_eval 安全解析 Python 字面量列表字符串
             vul_list = ast.literal_eval(data_str)
@@ -493,19 +505,10 @@ def clean_json_string(json_str):
     cleaned_str = json_str.replace("'", '"')
     return cleaned_str
 
+
 # 示例用法
 if __name__ == "__main__":
     f = DataUtils()
-    data_str = '''[
-            {
-                "jarCompletenessCheck": 0,
-                "dependencyPath": "[github.com/olivere/elastic/v7]/[go.opencensus.io:v0.23.0]/[google.golang.org/grpc:v1.33.2]/[google.golang.org/genproto:v0.0.0-20200526211855-cb27e3aa2013]/[golang.org/x/tools:v0.0.0-20190524140312-2c0ae7006135]/[golang.org/x/net:v0.0.0-20190311183353-d8887717615a]",
-                "filePath": "vendor/github.com/olivere/elastic/v7/go.mod"
-            },
-            {
-                "jarCompletenessCheck": 0,
-                "dependencyPath": "[github.com/olivere/elastic/v7]/[go.opencensus.io:v0.23.0]/[google.golang.org/grpc:v1.33.2]/[golang.org/x/net:v0.0.0-20190311183353-d8887717615a]",
-                "filePath": "vendor/github.com/olivere/elastic/v7/go.mod"
-            }
-        ]'''
-    print(f.dependencyPath_Trans(data_str))
+    data_str = "{'componentEsId': '', 'componentName': '', 'componentVersion': '', 'language': '', 'author': None, 'vendor': '', 'homeUrl': '', 'downloadUrl': '', 'sourceUrl': '', 'docUrl': '', 'description': '', 'migrationComponentList': [], 'licenseList': None, 'vulList': None}"
+
+    print(f.vulCount(data_str))

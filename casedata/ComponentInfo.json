@@ -1,5 +1,5 @@
 {
-  "sourceInfo":{
+  "sourceInfo": {
     "hashCode": "{ComponentListInfo.hashCode}",
     "风险等级": "{ComponentListInfo.securityLevelId}",
     "作者": "{ComponentListInfo.vendor}",
@@ -16,7 +16,7 @@
     "许可证信息": "{ComponentListInfo.license}",
     "许可证冲突": "否",
     "漏洞数": "{ComponentDetailInfo}",
-    "漏洞编号": "{ComponentVulList}",
+    "漏洞编号": "{ComponentVulList.records}",
     "推荐升级版本": "{ComponentListInfo.recommendVersion}",
     "最新发布版本": "{ComponentListInfo.lastVersion}",
     "无漏洞可用版本": "{ComponentVersionInfo}",
