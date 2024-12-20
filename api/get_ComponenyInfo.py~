@@ -1,0 +1,278 @@
+import os
+
+from common.data_utils import JsonUtil, DataUtils
+from common.request import RunMethod
+from common.log import Log
+from common.ini_manager import INIManager
+from common.yaml_utils import ConfigManager
+
+BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+log = Log()
+config = ConfigManager()
+sca_env = config.get_config()
+
+
+# web接口获取组件列表信息
+def get_ComponentList(taskId):
+    url = sca_env['base_url'] + f"/sca/api-v1/commonDetail/Component/getComponentListByTaskId"
+    headers = {
+        'OpenApiUserToken': sca_env['OpenApiUserToken'],
+    }
+    payload = {
+        "pageNum": 1,
+        "pageSize": 1000,
+        "taskId": taskId
+    }
+
+    try:
+        response = RunMethod().api_run("POST", url, json=payload, headers=headers)
+        if response.json()['code'] == 0:
+            log.info("获取组件列表成功")
+            print(f"获取组件列表成功{response.json()}")
+            return response.json()
+        else:
+            log.error(f"组件列表请求失败{response.json()}")
+            print(f"组件列表请求失败{response.json()}")
+
+    except Exception as e:
+        log.error("获取组件列表失败")
+        print(e)
+
+
+# web接口获取组件无漏洞可用版本
+def get_OtherComponentVersion(hashcode, language):
+    url = sca_env['base_url'] + f"/sca/api-v1/commonDetail/Component/getOtherComponentVersionESPage"
+    headers = {
+        'OpenApiUserToken': sca_env['OpenApiUserToken'],
+    }
+    payload = {'pageNum': 1,
+               'pageSize': 1000,
+               'hashCode': hashcode,
+               'language': language
+               }
+
+    try:
+        response = RunMethod().api_run("POST", url, json=payload, headers=headers)
+        if response.json()['code'] == 0:
+            log.info("获取组件无漏洞可用版本成功")
+            print(f"获取组件无漏洞可用版本成功{response.json()}")
+            return response.json()
+        else:
+            log.error(f"组件无漏洞可用版本请求失败{response.json()}")
+            print(f"组件无漏洞可用版本请求失败{response.json()}")
+
+    except Exception as e:
+        log.error("获取组件无漏洞可用版本失败")
+        print(e)
+
+
+# web接口获取组件依赖
+def get_ComponentDependency(taskId, **kwargs):
+    url = sca_env['base_url'] + f"/sca/api-v1/commonDetail/Component/getDependencyLevelPathById"
+    headers = {
+        'OpenApiUserToken': sca_env['OpenApiUserToken'],
+    }
+    payload = {"pageNum": 1,
+               "pageSize": 100,
+               "taskId": taskId,
+               "componentName": kwargs['componentName'],
+               "language": kwargs['language'],
+               "vendor": kwargs['vendor'],
+               "version": kwargs['version'],
+               "hashCode": kwargs['hashCode']
+               }
+
+    try:
+        response = RunMethod().api_run("POST", url, json=payload, headers=headers)
+        if response.json()['code'] == 0:
+            log.info("获取组件依赖成功")
+            print(f"获取组件依赖成功{response.json()}")
+            return response.json()
+        else:
+            log.error(f"获取组件依赖请求失败{response.json()}")
+            print(f"获取组件依赖请求失败{response.json()}")
+
+    except Exception as e:
+        log.error("获取组件依赖失败")
+        print(e)
+
+
+# web接口获取组件ES详情信息
+def get_ComponentESInfo(taskId, **kwargs):
+    url = sca_env['base_url'] + (f"/sca/api-v1/commonDetail/Component/getComponentESInfoByCondition?"
+                                 f"taskId={taskId}"
+                                 f"&language={kwargs['language']}"
+                                 f"&version={kwargs['version']}"
+                                 f"&componentName={kwargs['componentName']}"
+                                 f"&hashCode={kwargs['hashCode']}"
+                                 )
+    headers = {
+        'OpenApiUserToken': sca_env['OpenApiUserToken'],
+    }
+
+    try:
+        response = RunMethod().api_run("GET", url, headers=headers)
+        if response.json()['code'] == 0:
+            log.info("获取组件ES详情信息成功")
+            print(f"获取组件ES详情信息成功{response.json()}")
+            return response.json()
+        else:
+            log.error(f"获取组件ES详情信息请求失败{response.json()}")
+            print(f"获取组件ES详情信息请求失败{response.json()}")
+
+    except Exception as e:
+        log.error("获取组件ES详情信息失败")
+        print(e)
+
+
+# openapi接口获取组件详情
+def get_ComponentDetail(**kwargs):
+    url = sca_env['base_url'] + (f":8443/openapi/v1/component/detail?"
+                                 f"name={kwargs['componentName']}"
+                                 f"&language={kwargs['language']}"
+                                 f"&vendor={kwargs['vendor']}"
+                                 f"&version={kwargs['version']}"
+                                 )
+    headers = {
+        'OpenApiUserToken': sca_env['OpenApiUserToken'],
+    }
+
+    try:
+        response = RunMethod().api_run("GET", url, headers=headers)
+        if response.json()['code'] == 0:
+            log.info("获取组件详情信息成功")
+            print(f"获取组件详情信息成功{response.json()}")
+            return response.json()
+        else:
+            log.error(f"获取组件详情信息请求失败{response.json()}")
+            print(f"获取组件详情信息请求失败{response.json()}")
+
+    except Exception as e:
+        log.error("获取组件详情信息失败")
+        print(e)
+
+
+# web接口获取组件漏洞列表
+def get_ComponentVulList(taskId, **kwargs):
+    url = sca_env['base_url'] + f"/sca/api-v1/commonDetail/Component/getVulListByComponentId"
+    headers = {
+        'OpenApiUserToken': sca_env['OpenApiUserToken'],
+    }
+    payload = {"pageNum": 1,
+               "pageSize": 1000,
+               "taskId": taskId,
+               "hashCode": kwargs['hashCode']
+               }
+
+    try:
+        response = RunMethod().api_run("POST", url, json=payload, headers=headers)
+        if response.json()['code'] == 0:
+            log.info("获取组件漏洞列表成功")
+            print(f"获取组件漏洞列表成功{response.json()}")
+            return response.json()
+        else:
+            log.error(f"获取组件漏洞列表请求失败{response.json()}")
+            print(f"获取组件漏洞列表请求失败{response.json()}")
+
+    except Exception as e:
+        log.error("获取组件漏洞列表失败")
+        print(e)
+
+
+class InfoGet:
+    # 初始化获取接口信息
+    def __init__(self, taskId_type, record_index):
+        ini = INIManager(BASE_PATH + r'\api\variables.ini')
+        self.taskId = ini.get_value('variables', taskId_type)
+        self.index = record_index
+        # 获取接口数据
+        try:
+            ComponentListInfo = get_ComponentList(self.taskId)['data']['records'][self.index]
+            data = {"componentName": ComponentListInfo['componentName'],
+                    "language": ComponentListInfo['language'],
+                    "vendor": ComponentListInfo['vendor'],
+                    "version": ComponentListInfo['version'],
+                    "hashCode": ComponentListInfo['hashCode']}
+            ComponentVersion = get_OtherComponentVersion(data['hashCode'], data['language'])
+            ComponentDependencyInfo = get_ComponentDependency(self.taskId,
+                                                              componentName=data['componentName'],
+                                                              language=data['language'],
+                                                              vendor=data['vendor'],
+                                                              version=data['version'],
+                                                              hashCode=data['hashCode']
+                                                              )
+            ComponentESInfo = get_ComponentESInfo(self.taskId,
+                                                  componentName=data['componentName'],
+                                                  language=data['language'],
+                                                  version=data['version'],
+                                                  hashCode=data['hashCode'])
+            ComponentDetailInfo = get_ComponentDetail(componentName=data['componentName'],
+                                                      language=data['language'],
+                                                      vendor=data['vendor'],
+                                                      version=data['version']
+                                                      )
+            ComponentVulList = get_ComponentVulList(self.taskId,
+                                                    hashCode=data['hashCode']
+                                                    )
+
+            self.objects = {
+                'ini': ini,
+                'ComponentListInfo': ComponentListInfo,
+                'ComponentVersionInfo': ComponentVersion['data']['records'],
+                'ComponentDependencyInfo': ComponentDependencyInfo['data']['records'],
+                'ComponentESInfo': ComponentESInfo['data'],
+                'ComponentDetailInfo': ComponentDetailInfo['data'],
+                'ComponentVulList': ComponentVulList['data']['records']
+
+            }
+        except Exception as e:
+            self.objects = None
+            log.error(f"获取接口数据失败{e}")
+        self.json_util = JsonUtil(r'casedata\ComponentInfo.json')  # 替换为你的 JSON 文件路径
+
+    # 配置app检测基础应用信息
+    def get_source_appInfo(self):
+        data_Trans = DataUtils()
+        if self.objects is None:
+            log.error(f'InfoGet接口数据初始化失败')
+            return False
+        app_info = self.json_util.read_ApplicationInfo("sourceInfo", self.objects)
+        # 数据二次处理
+        try:
+            app_info['风险等级'] = data_Trans.riskLevel_Trans(app_info['风险等级'])
+            app_info['依赖方式'] = data_Trans.dependencyType_Trans(app_info['依赖方式'])
+            app_info['恶意组件'] = data_Trans.is_Trans(app_info['恶意组件'])
+            app_info['私有组件'] = data_Trans.is_Trans(app_info['私有组件'])
+            app_info['许可证信息'] = data_Trans.license_Trans(app_info['许可证信息'])
+            app_info['无漏洞可用版本'] = data_Trans.noVulVersion_Trans(app_info['无漏洞可用版本'])
+            app_info['组件依赖路径'] = data_Trans.dependencyPath_Trans(app_info['组件依赖路径'])
+            app_info['漏洞数'] = data_Trans.vulCount(app_info['漏洞数'])
+            app_info['漏洞编号'] = data_Trans.vulNumber(app_info['漏洞编号'])
+        except Exception as e:
+            log.error(f"{e}")
+        # 销毁应用信息对象
+        for obj_name in list(self.objects.keys()):
+            del self.objects[obj_name]
+
+        return app_info
+
+
+if __name__ == '__main__':
+    # for i in range(3):
+    #     info = InfoGet("scataskid", i)
+    #     print(info.get_source_appInfo())
+    # info = InfoGet("scataskid", 0)
+    # print(info.get_source_appInfo())
+    f = DataUtils()
+    ComponentListInfo = get_ComponentList(613243)['data']['records'][0]
+    data = {"componentName": ComponentListInfo['componentName'],
+            "language": ComponentListInfo['language'],
+            "vendor": ComponentListInfo['vendor'],
+            "version": ComponentListInfo['version'],
+            "hashCode": ComponentListInfo['hashCode']}
+    ComponentVulList = get_ComponentVulList(taskId=613243,
+                                            hashCode=data['hashCode']
+
+                                            )
+    print(f"{ComponentVulList['data']['records']}")
+    print(f.vulNumber(f"{ComponentVulList['data']['records']}"))
