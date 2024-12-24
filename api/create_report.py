@@ -115,11 +115,6 @@ def main():
             url = sca_env['base_url'] + ":8443/openapi/v1/asset/report/task"
 
             payload = json.dumps({
-                "advancedSearch": {
-                    "componentSecurityLevelList": [
-                        1
-                    ]
-                },
                 "dimension": 5,
                 "reportName": f"Report_Test-{RandomDataGenerator().numerify(4)}",
                 "scaTaskId": task_id,

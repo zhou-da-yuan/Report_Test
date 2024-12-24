@@ -126,7 +126,7 @@ class InfoGet:
 
 
 if __name__ == '__main__':
-    excel = Excel('D://供应链场景excel报告.xlsx', "sheet标题及表头测试", BASE_PATH + r'\Reports\镜像检测报告.xlsx')
+    excel = Excel(BASE_PATH + r'\Reports\镜像检测报告.xlsx', 'D://供应链场景excel报告.xlsx', "sheet标题及表头测试")
 
     report_data = excel.get_ApplicationInfo()
     info = InfoGet("imageTaskId")

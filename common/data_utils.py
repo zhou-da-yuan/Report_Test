@@ -3,6 +3,8 @@ import os
 import json
 import re
 
+from packaging import version
+
 from common.log import Log
 
 BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -174,7 +176,7 @@ class DataUtils:
             '2': '高危',
             '3': '中危',
             '4': '低危',
-            '5': '无漏洞'
+            '5': '无风险'
         }
 
         # 检查输入是否有效
@@ -323,7 +325,7 @@ class DataUtils:
         # 提取版本号
         versions = [item.get('version') for item in data if 'version' in item]
 
-        return ', '.join(versions)
+        return ','.join(versions)
 
     def dependencyPath_Trans(self, data_str):
         """
@@ -421,9 +423,10 @@ class DataUtils:
         抛出:
             ValueError: 如果输入数据格式不正确或解析失败。
         """
-        if data_str == '' or data_str is None:
+        if not data_str or data_str.strip() == '':
             log.debug("该组件无漏洞")
             return ""
+
         try:
             # 使用 ast.literal_eval 安全解析 Python 字面量列表字符串
             vul_list = ast.literal_eval(data_str)
@@ -431,6 +434,9 @@ class DataUtils:
                 raise ValueError("输入不是一个有效的漏洞列表字符串。")
         except (ValueError, SyntaxError) as e:
             raise ValueError(f"无效的漏洞列表字符串: {e}")
+
+        # 按 'id' 字段排序
+        vul_list_sorted = sorted(vul_list, key=lambda x: x.get('id', ''))
 
         # 定义严重程度映射
         severity_map = {
@@ -443,8 +449,8 @@ class DataUtils:
         # 初始化结果字典
         result = {severity: [] for severity in severity_map.values()}
 
-        # 遍历漏洞列表并分类收集所有 ID
-        for vul in vul_list:
+        # 遍历排序后的漏洞列表并分类收集所有 ID
+        for vul in vul_list_sorted:
             security_level_id = vul.get('securityLevelId')
             if security_level_id in severity_map:
                 severity = severity_map[security_level_id]
@@ -452,8 +458,9 @@ class DataUtils:
                 id_to_use = (
                         vul.get('cveId') or
                         vul.get('cnnvdId') or
-                        vul.get('cweId') or
-                        vul.get('vulId')
+                        vul.get('cnvdId') or
+                        vul.get('vulId') or
+                        vul.get('cweId')
                 )
                 result[severity].append(id_to_use)
 

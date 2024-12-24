@@ -10,7 +10,7 @@ BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 log = Log()
 
 # 实例用例与测试数据
-excel = Excel('D://供应链场景excel报告.xlsx', "sheet标题及表头测试", BASE_PATH+f'\Reports\二进制检测报告.xlsx')
+excel = Excel(BASE_PATH + f'\Reports\二进制检测报告.xlsx', 'D://供应链场景excel报告.xlsx', "sheet标题及表头测试")
 # 下载报告
 def setup_module(module):
     Get_Report.binary()

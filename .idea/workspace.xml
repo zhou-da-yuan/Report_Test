@@ -6,9 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="142c5c98-611d-465a-a3fb-df8525746c36" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reports/Get_Report.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reports/Get_Report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case1_ReportSheet/test_BinaryReport_Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case1_ReportSheet/test_BinaryReport_Sheet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case1_ReportSheet/test_ImageReport_Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case1_ReportSheet/test_ImageReport_Sheet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case1_ReportSheet/test_SourceReport_Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case1_ReportSheet/test_SourceReport_Sheet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case2_ReportInfo/test_Report_ApplicationInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case2_ReportInfo/test_Report_ApplicationInfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/create_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/create_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/get_ApplicationInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/get_ApplicationInfo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/get_ComponenyInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/get_ComponenyInfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/variables.ini" beforeDir="false" afterPath="$PROJECT_DIR$/api/variables.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/casedata/ComponentInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/casedata/ComponentInfo.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/data_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/data_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/excel_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/excel_utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +64,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python 测试.Python 测试 (test_Report_ApplicationInfo.py 内).executor": "Run",
+    "Python 测试.Python 测试 (test_Report_ComponentInfo.py 内).executor": "Run",
     "Python 测试.Python 测试 (test_SourceReport_Sheet.py 内).executor": "Run",
     "Python 测试.Python 测试 (test_report_Sheet.py 内).executor": "Run",
     "Python 测试.Python 测试 (test_report_SheetNames.py 内).executor": "Run",

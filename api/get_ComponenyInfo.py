@@ -49,7 +49,8 @@ def get_OtherComponentVersion(hashcode, language):
     payload = {'pageNum': 1,
                'pageSize': 1000,
                'hashCode': hashcode,
-               'language': language
+               'language': language,
+               'versionOrder': "ascend"
                }
 
     try:
@@ -182,19 +183,18 @@ def get_ComponentVulList(taskId, **kwargs):
 
 class InfoGet:
     # 初始化获取接口信息
-    def __init__(self, taskId_type, record_index, ComponentList):
+    def __init__(self, taskId_type, ComponentInfo):
         self.taskId = ini.get_value('variables', taskId_type)
-        self.index = record_index
-        self.ComponentList = ComponentList
+        self.ComponentInfo = ComponentInfo
         # 获取接口数据
         try:
-            # ComponentListInfo = get_ComponentList(self.taskId)['data']['records'][self.index]
-            ComponentListInfo = self.ComponentList[self.index]
-            data = {"componentName": ComponentListInfo['componentName'],
-                    "language": ComponentListInfo['language'],
-                    "vendor": ComponentListInfo['vendor'],
-                    "version": ComponentListInfo['version'],
-                    "hashCode": ComponentListInfo['hashCode']}
+            # ComponentInfo = get_ComponentList(self.taskId)['data']['records'][self.index]
+            ComponentInfo = self.ComponentInfo
+            data = {"componentName": ComponentInfo['componentName'],
+                    "language": ComponentInfo['language'],
+                    "vendor": ComponentInfo['vendor'],
+                    "version": ComponentInfo['version'],
+                    "hashCode": ComponentInfo['hashCode']}
             ComponentVersion = get_OtherComponentVersion(data['hashCode'], data['language'])
             ComponentDependencyInfo = get_ComponentDependency(self.taskId,
                                                               componentName=data['componentName'],
@@ -219,7 +219,7 @@ class InfoGet:
 
             self.objects = {
                 'ini': ini,
-                'ComponentListInfo': ComponentListInfo,
+                'ComponentInfo': ComponentInfo,
                 'ComponentVersionInfo': ComponentVersion['data'],
                 'ComponentDependencyInfo': ComponentDependencyInfo['data']['records'],
                 'ComponentESInfo': ComponentESInfo['data'],
@@ -227,11 +227,10 @@ class InfoGet:
                 'ComponentVulList': ComponentVulList['data']
             }
             log.info(
-                f"componentName: {self.ComponentList[self.index]["componentName"]} index：{self.index} 接口数据获取成功！")
+                f"componentName: {self.ComponentInfo["componentName"]} 接口数据获取成功！")
         except Exception as e:
             self.objects = None
-            log.error(
-                f"componentName: {ComponentList[self.index]["componentName"]} index: {self.index} 接口数据获取失败,请查看日志-{e}")
+            log.error(f"componentName: {ComponentInfo["componentName"]} 接口数据获取失败,请查看日志-{e}")
 
         self.json_util = JsonUtil(r'casedata\ComponentInfo.json')  # 替换为你的 JSON 文件路径
 
@@ -240,8 +239,8 @@ class InfoGet:
         data_Trans = DataUtils()
         if self.objects is None:
             log.error(
-                f"componentName: {self.ComponentList[self.index]["componentName"]} index：{self.index} InfoGet接口数据初始化失败")
-            return f"componentName: {self.ComponentList[self.index]["componentName"]} index：{self.index} InfoGet接口数据初始化失败"
+                f"componentName: {self.ComponentInfo["componentName"]} InfoGet接口数据初始化失败")
+            return f"componentName: {self.ComponentInfo["componentName"]} InfoGet接口数据初始化失败"
         app_info = self.json_util.read_ApplicationInfo("sourceInfo", self.objects)
 
         # 接口数据二次清洗
@@ -257,7 +256,7 @@ class InfoGet:
             app_info['漏洞编号'] = data_Trans.vulNumber(app_info['漏洞编号'])
         except Exception as e:
             log.error(
-                f"componentName: {self.ComponentList[self.index]["componentName"]} index：{self.index} app_info数据清洗出错-{e}")
+                f"componentName: {self.ComponentInfo["componentName"]} app_info数据清洗出错-{e}")
 
         # 销毁应用信息对象
         for obj_name in list(self.objects.keys()):
@@ -269,8 +268,8 @@ class InfoGet:
 if __name__ == '__main__':
     taskId = ini.get_value('variables', 'scataskid')
     ComponentListInfo = get_ComponentList(taskId)['data']['records']
-    for i in range(len(ComponentListInfo)):
-        info = InfoGet("scataskid", i, ComponentListInfo)
+    for ComponentInfo in ComponentListInfo:
+        info = InfoGet("scataskid", ComponentInfo)
         print(info.get_source_appInfo())
     # info = InfoGet("scataskid", 0)
     # print(info.get_source_appInfo())
