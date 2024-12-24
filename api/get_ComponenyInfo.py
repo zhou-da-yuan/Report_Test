@@ -220,7 +220,7 @@ class InfoGet:
             self.objects = {
                 'ini': ini,
                 'ComponentListInfo': ComponentListInfo,
-                'ComponentVersionInfo': ComponentVersion['data']['records'],
+                'ComponentVersionInfo': ComponentVersion['data'],
                 'ComponentDependencyInfo': ComponentDependencyInfo['data']['records'],
                 'ComponentESInfo': ComponentESInfo['data'],
                 'ComponentDetailInfo': ComponentDetailInfo['data'],

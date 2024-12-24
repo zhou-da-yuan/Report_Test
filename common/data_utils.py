@@ -309,6 +309,9 @@ class DataUtils:
         抛出:
             ValueError: 如果输入数据格式不正确或解析失败。
         """
+        if data_str == '':
+            log.debug("该组件无漏洞版本")
+            return ""
         try:
             # 将字符串转换为列表
             data = ast.literal_eval(data_str)
@@ -399,7 +402,7 @@ class DataUtils:
                 severity_counts[severity_map[security_level_id]] += 1
 
         # 确保至少有一个严重程度的计数大于 0
-        non_zero_severities = [f"{severity}:{count}" for severity, count in severity_counts.items() if count > 0]
+        non_zero_severities = [f"{severity}:{count}" for severity, count in severity_counts.items()]
         formatted_output = f"{total_vul_count}({';'.join(non_zero_severities)})" if non_zero_severities else f"{total_vul_count}(严重:0;高危:0;中危:0;低危:0)"
 
         return formatted_output
