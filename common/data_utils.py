@@ -312,7 +312,7 @@ class DataUtils:
             ValueError: 如果输入数据格式不正确或解析失败。
         """
         if data_str == '':
-            log.debug("该组件无漏洞版本")
+            log.debug("该组件无可用无漏洞版本")
             return ""
         try:
             # 将字符串转换为列表
@@ -409,6 +409,44 @@ class DataUtils:
 
         return formatted_output
 
+    def vulCount_image(self, data_str):
+        """
+        镜像检测统计漏洞数量及不同严重程度的漏洞数量。
+
+        参数:
+            data_str (str): 包含组件信息和漏洞列表的 JSON 字符串。
+
+        返回:
+            str: 总漏洞数量及不同严重程度的漏洞数量的格式化字符串。
+
+        抛出:
+            ValueError: 如果输入数据格式不正确或解析失败。
+        """
+        try:
+            # 尝试使用 ast.literal_eval 安全解析 Python 字面量表达式
+            data = ast.literal_eval(data_str)
+            if not isinstance(data, dict) or 'vulList' not in data:
+                raise ValueError("输入不是一个有效的漏洞数据字符串。")
+        except (ValueError, SyntaxError) as e:
+            raise ValueError(f"无效的漏洞数据字符串: {e}")
+
+        # 提取漏洞数据
+        vul_list = data.get('vulList')
+
+        if vul_list is None:
+            log.debug("该组件无漏洞")
+            return 0
+
+        if not isinstance(vul_list, list):
+            raise ValueError("vulList 不是一个有效的列表。")
+
+
+        # 初始化统计变量
+        total_vul_count = len(vul_list)
+
+        return total_vul_count
+
+
     def vulNumber(self, data_str):
         """
         提取并格式化漏洞信息中的 cveId、cnnvdId、cweId 或 vulId，
@@ -476,6 +514,96 @@ class DataUtils:
         formatted_output = ';'.join(formatted_output_parts)
 
         return formatted_output
+
+    def licenseCount(self, data_str):
+        """
+        返回许可证数量
+
+        参数:
+            data_str (str): 包含 JSON 数据的字符串。
+
+        返回:
+            int: 列表中元素的数量。
+        """
+        try:
+            # 尝试将输入字符串解析为JSON对象
+            data = json.loads(data_str)
+
+            # 检查data是否是列表
+            if not isinstance(data, list):
+                raise ValueError("输入不是一个有效的JSON列表。")
+
+            # 返回列表中元素的数量
+            return len(data)
+        except json.JSONDecodeError as e:
+            log.error(f"JSON解析失败: {e}")
+            return 0
+        except Exception as e:
+            log.error(f"处理数据时发生错误: {e}")
+            return 0
+
+    def dependencies_Trans(self, data_str):
+        """
+        从给定的字符串列表中提取所有 'dependencyPackage' 字段的值，
+        并返回以逗号分隔的字符串。
+
+        参数:
+            data_str (str): 包含 Python 字典或列表的字符串。
+
+        返回:
+            str: 以逗号分隔的 'dependencyPackage' 字段值的字符串。
+        """
+        if data_str == '' or data_str == '[]':
+            log.info("该软件包无依赖包")
+            return ""
+
+        try:
+            # 使用ast.literal_eval解析字符串为Python对象
+            data = ast.literal_eval(data_str)
+
+            # 检查data是否是列表
+            if not isinstance(data, list):
+                raise ValueError("输入不是一个有效的列表。")
+
+            # 提取所有'dependencyPackage'字段的值
+            dependency_packages = [item['dependencyPackage'] for item in data if
+                                   isinstance(item, dict) and 'dependencyPackage' in item]
+
+            # 返回以逗号分隔的字符串
+            return ','.join(dependency_packages)
+        except (ValueError, SyntaxError) as e:
+            log.error(f"解析失败: {e}")
+            return ""
+        except Exception as e:
+            log.error(f"处理数据时发生错误: {e}")
+            return ""
+
+    def dependencyCount(self, data_str):
+        """
+        返回检出路径数
+
+        参数:
+            data_str (str): 包含 JSON 数据的字符串。
+
+        返回:
+            int: 列表中元素的数量。
+        """
+        try:
+            # 使用ast.literal_eval解析字符串为Python对象
+            data = ast.literal_eval(data_str)
+
+            # 检查data是否是列表
+            if not isinstance(data, list):
+                raise ValueError("输入不是一个有效的JSON列表。")
+
+            # 返回列表中元素的数量
+            return len(data)
+        except json.JSONDecodeError as e:
+            log.error(f"JSON解析失败: {e}")
+            return 0
+        except Exception as e:
+            log.error(f"处理数据时发生错误: {e}")
+            return 0
 
 
 def str_to_list(list_str):

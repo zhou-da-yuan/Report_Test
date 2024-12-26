@@ -35,7 +35,7 @@
     "hashCode": "{ComponentInfo.hashCode}",
     "风险等级": "{ComponentInfo.securityLevelId}",
     "作者": "{ComponentInfo.vendor}",
-    "组件名称": "{ComponentInfo.componentNameVendor}",
+    "组件名称": "{ComponentInfo.vendor}:{ComponentInfo.componentName}",
     "版本号": "{ComponentInfo.version}",
     "所属语言": "{ComponentInfo.language}",
     "恶意组件": "{ComponentInfo.poison}",

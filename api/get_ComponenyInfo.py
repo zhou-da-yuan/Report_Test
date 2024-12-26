@@ -346,10 +346,11 @@ class InfoGet:
             '风险等级': DataUtils().riskLevel_Trans,
             '许可证数': DataUtils().licenseCount,
             '许可证信息': DataUtils().license_Trans,
-            '漏洞数': DataUtils().vulCount,
+            '漏洞数': DataUtils().vulCount_image,
             '漏洞编号': DataUtils().vulNumber,
             '依赖包名称': DataUtils().dependencies_Trans,
             '检出路径数': DataUtils().dependencyCount,
+            '依赖包数': int
         }
 
         cleaned_app_info = self._clean_app_info(app_info, transformations)
@@ -365,17 +366,17 @@ class InfoGet:
 
 
 if __name__ == '__main__':
-    taskId = ini.get_value('variables', 'sourcetaskid')
-    ComponentListInfo = get_ComponentList(taskId)['data']['records']
-    for ComponentInfo in ComponentListInfo:
-        info = InfoGet("sourcetaskid", ComponentInfo)
-        print(info.get_source_appInfo())
+    # taskId = ini.get_value('variables', 'sourcetaskid')
+    # ComponentListInfo = get_ComponentList(taskId)['data']['records']
+    # for ComponentInfo in ComponentListInfo:
+    #     info = InfoGet("sourcetaskid", ComponentInfo)
+    #     print(info.get_source_appInfo())
 
-    taskId = ini.get_value('variables', 'binarytaskid')
-    ComponentListInfo = get_ComponentList(taskId)['data']['records']
-    for ComponentInfo in ComponentListInfo:
-        info = InfoGet("binarytaskid", ComponentInfo)
-        print(info.get_binary_appInfo())
+    # taskId = ini.get_value('variables', 'binarytaskid')
+    # ComponentListInfo = get_ComponentList(taskId)['data']['records']
+    # for ComponentInfo in ComponentListInfo:
+    #     info = InfoGet("binarytaskid", ComponentInfo)
+    #     print(info.get_binary_appInfo())
 
     taskId = ini.get_value('variables', 'imagetaskid')
     ComponentListInfo = get_ComponentList(taskId)['data']['records']
