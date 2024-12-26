@@ -69,7 +69,7 @@
     "风险等级": "{ComponentInfo.securityLevelId}",
     "许可证数": "{ComponentInfo.license}",
     "许可证信息": "{ComponentInfo.license}",
-    "漏洞数": "{ComponentDetailInfo}",
+    "漏洞数": "{ComponentVulList.records}",
     "漏洞编号": "{ComponentVulList.records}",
     "依赖包数": "{ComponentInfo.dependencyCount}",
     "依赖包名称": "{dependenciesInfo.records}",

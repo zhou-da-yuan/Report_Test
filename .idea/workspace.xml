@@ -6,8 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="142c5c98-611d-465a-a3fb-df8525746c36" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case2_ReportInfo/test_Report_ComponentInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case2_ReportInfo/test_Report_ComponentInfo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/get_ComponenyInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/get_ComponenyInfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reports/Get_Report.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reports/Get_Report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reports/二进制检测报告.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reports/标记副本_二进制检测报告.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reports/标记副本_源码检测报告.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reports/标记副本_镜像检测报告.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reports/源码检测报告.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reports/镜像检测报告.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case1_ReportSheet/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case1_ReportSheet/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/download_Report.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/download_Report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/variables.ini" beforeDir="false" afterPath="$PROJECT_DIR$/api/variables.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/casedata/ComponentInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/casedata/ComponentInfo.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/data_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/data_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/conftest.py" afterDir="false" />

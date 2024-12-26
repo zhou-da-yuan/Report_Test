@@ -1,4 +1,5 @@
 import sys
+import time
 
 from api import *
 from common.log import Log
@@ -33,6 +34,8 @@ def source():
         log.info(f"{function_name}-开始应用检测...")
         source_Detect.main()
         log.info(f"{function_name}-应用检测完成")
+
+        time.sleep(100) # 源码检测后马上下载的报告组件状态不对所以需要等待
 
         # 创建报告
         log.info(f"{function_name}-开始创建报告...")

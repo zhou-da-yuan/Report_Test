@@ -411,7 +411,7 @@ class DataUtils:
 
     def vulCount_image(self, data_str):
         """
-        镜像检测统计漏洞数量及不同严重程度的漏洞数量。
+        镜像检测统计漏洞数量。
 
         参数:
             data_str (str): 包含组件信息和漏洞列表的 JSON 字符串。
@@ -422,29 +422,19 @@ class DataUtils:
         抛出:
             ValueError: 如果输入数据格式不正确或解析失败。
         """
-        try:
-            # 尝试使用 ast.literal_eval 安全解析 Python 字面量表达式
-            data = ast.literal_eval(data_str)
-            if not isinstance(data, dict) or 'vulList' not in data:
-                raise ValueError("输入不是一个有效的漏洞数据字符串。")
-        except (ValueError, SyntaxError) as e:
-            raise ValueError(f"无效的漏洞数据字符串: {e}")
-
-        # 提取漏洞数据
-        vul_list = data.get('vulList')
-
-        if vul_list is None:
-            log.debug("该组件无漏洞")
+        if not data_str or data_str.strip() == '':
+            log.debug("该软件包无漏洞")
             return 0
 
-        if not isinstance(vul_list, list):
-            raise ValueError("vulList 不是一个有效的列表。")
+        try:
+            # 使用 ast.literal_eval 安全解析 Python 字面量列表字符串
+            vul_list = ast.literal_eval(data_str)
+            if not isinstance(vul_list, list):
+                raise ValueError("输入不是一个有效的漏洞列表字符串。")
+        except (ValueError, SyntaxError) as e:
+            raise ValueError(f"无效的漏洞列表字符串: {e}")
 
-
-        # 初始化统计变量
-        total_vul_count = len(vul_list)
-
-        return total_vul_count
+        return len(vul_list)
 
 
     def vulNumber(self, data_str):

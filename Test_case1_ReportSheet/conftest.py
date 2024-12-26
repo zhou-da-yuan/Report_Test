@@ -27,4 +27,4 @@ def RunMethod_instance():
 def project_manager():
     Get_Report.createProject()
     yield # 创建项目/删除项目
-    Get_Report.deleteProject()
+    # Get_Report.deleteProject()

@@ -1,5 +1,5 @@
 import pytest
-from Reports import Delete_Report
+from Reports import Delete_Report, Get_Report
 from common.log import Log
 
 log = Log()
@@ -24,11 +24,13 @@ def pytest_runtest_makereport(item, call):
 def pytest_sessionfinish(session, exitstatus):
     if not getattr(session, 'test_failed', True):  # 默认值为True以确保首次运行时不会误判
         delete_reports()
-        log.info("所有用例通过，已清理报告")
+        log.info("所有用例通过，已清理报告和项目")
     else:
-        log.error("存在未通过的用例，报告已保留")
+        log.error("存在未通过的用例，报告和项目已保留")
 
 # 定义后置函数
 def delete_reports():
     # 删除报告
     Delete_Report.all()
+    # 删除项目
+    Get_Report.deleteProject()
