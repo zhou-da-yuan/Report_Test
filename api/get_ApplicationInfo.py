@@ -96,7 +96,7 @@ class InfoGet:
         self.json_util = JsonUtil(r'casedata\ApplicationInfo.json')  # 替换为你的 JSON 文件路径
 
 
-    # 配置app检测基础应用信息
+    # 获取源码检测基础应用信息
     def get_source_appInfo(self):
 
         app_info = self.json_util.read_ApplicationInfo("sourceInfo", self.objects)
@@ -106,6 +106,7 @@ class InfoGet:
 
         return app_info
 
+    # 获取二进制检测基础应用信息
     def get_binary_appInfo(self):
 
         app_info = self.json_util.read_ApplicationInfo("binaryInfo", self.objects)
@@ -115,6 +116,7 @@ class InfoGet:
 
         return app_info
 
+    # 获取镜像检测基础应用信息
     def get_image_appInfo(self):
 
         app_info = self.json_util.read_ApplicationInfo("imageInfo", self.objects)
