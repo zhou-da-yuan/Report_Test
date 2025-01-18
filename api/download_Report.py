@@ -17,11 +17,11 @@ def main(fileName):
     sca_env = config.get_config()
 
     # 根据报告id查询报告状态
-    url = sca_env["base_url"] + ":8443/openapi/v1/asset/report/status/" + ini.get_value('variables', 'reportId')
+    url = sca_env["base_url"] + f":{sca_env['api_port']}/openapi/v1/asset/report/status/" + ini.get_value('variables', 'reportId')
 
     payload = ""
     headers = {
-        'OpenApiUserToken': '8c20b45e8a394c818493261357d4b90a',
+        'OpenApiUserToken': sca_env['OpenApiUserToken'],
         'Content-Type': 'application/json'
     }
 
@@ -59,7 +59,7 @@ def main(fileName):
 
             # 发送请求
             try:
-                url = sca_env['base_url'] + ":8443/openapi/v1/asset/report/downLoadReport/batch"
+                url = sca_env['base_url'] + f":{sca_env['api_port']}/openapi/v1/asset/report/downLoadReport/batch"
                 payload = json.dumps({
                     "reportIds": [
                         ini.get_value('variables', 'reportId', data_type=int)

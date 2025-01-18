@@ -14,7 +14,7 @@ def main():
     BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     ini = INIManager(BASE_PATH + r'\api\variables.ini')
 
-    url = sca_env['base_url'] + f":{sca_env['web_port']}/sca/api-v1/asset/report/deleteBatch"
+    url = sca_env['base_url'] + "/sca/api-v1/asset/report/deleteBatch"
     report_id = ini.get_value('variables', 'reportid', data_type=int)
     payload = {
         "idList": [report_id]

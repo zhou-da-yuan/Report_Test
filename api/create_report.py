@@ -18,7 +18,7 @@ def main():
     ini = INIManager(BASE_PATH + r'\api\variables.ini')
 
     # 查询任务状态
-    url = sca_env['base_url'] + ":8443/openapi/v1/task/batch/status"
+    url = sca_env['base_url'] + f":{sca_env['api_port']}/openapi/v1/task/batch/status"
     task_id = ini.get_value('variables', 'scaTaskId', data_type=int)
     payload = json.dumps({
         "taskIdList": [
@@ -112,7 +112,7 @@ def main():
 
         # 任务完成后生成报告
         if canProceed:
-            url = sca_env['base_url'] + ":8443/openapi/v1/asset/report/task"
+            url = sca_env['base_url'] + f":{sca_env['api_port']}/openapi/v1/asset/report/task"
 
             payload = json.dumps({
                 "dimension": 5,
@@ -132,7 +132,7 @@ def main():
                 print(f"报告ID写入成功-{response.json()['data']}")
             else:
                 log.error(f"报告生成失败{response.json()}")
-                print(f"报告生成id {task_id}")
+                print(f"报告生成失败 taskId:{task_id}")
         else:
             ini.set_value('variables', 'reportId', "")
             ini.save_config()

@@ -14,7 +14,7 @@ def main():
     BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     ini = INIManager(BASE_PATH + r'\api\variables.ini')
 
-    url = sca_env['base_url'] + ":8443/openapi/v1/project/delete"
+    url = sca_env['base_url'] + f":{sca_env['api_port']}/openapi/v1/project/delete"
     project_id = ini.get_value('variables', 'projectId', data_type=int)
     payload = {
         "projectId": project_id

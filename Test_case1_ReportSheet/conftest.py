@@ -17,10 +17,10 @@ def RunMethod_instance():
     request.close_session()
     log.info("测试结束，RunMethod 实例已释放")
 
-# @pytest.fixture(scope="session",autouse=True)
-# def clear_reports():
-#     yield    # 删除报告
-#     Delete_Report.all()
+@pytest.fixture(scope="session",autouse=True)
+def clear_reports():
+    Delete_Report.all()
+    yield    # 删除报告
 
 
 @pytest.fixture(scope="session", autouse=True)

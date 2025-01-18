@@ -17,7 +17,7 @@ def main():
 
     file_path = os.path.join(BASE_PATH, r'Packages\curl.zst')
 
-    url = sca_env['base_url'] + ":8443/openapi/v1/binary/detect-file"
+    url = sca_env['base_url'] + f":{sca_env['api_port']}/openapi/v1/binary/detect-file"
     project_name = ini.get_value('variables', 'projectName')
     binaryDetectName = f"binaryDetect{RandomDataGenerator().numerify(4)}"
     payload = {'projectName': project_name,

@@ -16,7 +16,7 @@ def main():
     sca_env = config.get_config()
     ini = INIManager(BASE_PATH + r'\api\variables.ini')
 
-    url = sca_env['base_url'] + ":8443/openapi/v1/project/create"
+    url = sca_env['base_url'] + f":{sca_env['api_port']}/openapi/v1/project/create"
     payload = json.dumps({
         "name": f"Report_Test-{RandomDataGenerator().numerify(4)}",
         "description": "报告自动化测试",
@@ -48,7 +48,7 @@ def main():
             log.error(f"projectId变量写入失败-{e}")
             print(f"projectId变量写入失败-{e}")
 
-        url = sca_env['base_url'] + ":8443/openapi/v1/project/detail/" + str(project_id)
+        url = sca_env['base_url'] + f":{sca_env['api_port']}/openapi/v1/project/detail/" + str(project_id)
         payload = {}
         headers = {
             'OpenApiUserToken': sca_env['OpenApiUserToken'],

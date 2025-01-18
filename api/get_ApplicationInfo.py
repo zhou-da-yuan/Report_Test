@@ -16,7 +16,7 @@ sca_env = config.get_config()
 # web接口获取应用信息
 def get_VOInfoByTaskId(taskId):
 
-    url = sca_env['base_url'] + f"/sca/api-v1/commonDetail/ApplicationPackageOverView/getApplicationVOInfoByTaskId?taskId={taskId}"
+    url = sca_env['base_url'] + f":{sca_env['web_port']}/sca/api-v1/commonDetail/ApplicationPackageOverView/getApplicationVOInfoByTaskId?taskId={taskId}"
     headers = {
         'OpenApiUserToken': sca_env['OpenApiUserToken'],
     }
@@ -38,7 +38,7 @@ def get_VOInfoByTaskId(taskId):
 # web接口获取检测组件、漏洞、许可证统计信息
 def get_CVLCountTaskId(taskId):
 
-    url = sca_env['base_url'] + f"/sca/api-v1/commonDetail/ApplicationPackageOverView/getApplicationCVLCountByTaskId?taskId={taskId}"
+    url = sca_env['base_url'] + f":{sca_env['web_port']}/sca/api-v1/commonDetail/ApplicationPackageOverView/getApplicationCVLCountByTaskId?taskId={taskId}"
     headers = {
         'OpenApiUserToken': sca_env['OpenApiUserToken'],
     }
@@ -59,9 +59,9 @@ def get_CVLCountTaskId(taskId):
 
 # openapi接口根据任务id获取任务详情
 def get_TaskDetails(taskId):
-    url = sca_env["base_url"]+f":8443/openapi/v1/task/{taskId}"
+    url = sca_env["base_url"]+f":{sca_env['api_port']}/openapi/v1/task/{taskId}"
     headers = {
-        'OpenApiUserToken': '8c20b45e8a394c818493261357d4b90a'
+        'OpenApiUserToken': sca_env['OpenApiUserToken']
     }
 
     try:

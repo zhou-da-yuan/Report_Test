@@ -15,7 +15,7 @@ ini = INIManager(BASE_PATH + r'\api\variables.ini')
 
 # web接口获取组件列表信息
 def get_ComponentList(taskId):
-    url = sca_env['base_url'] + f"/sca/api-v1/commonDetail/Component/getComponentListByTaskId"
+    url = sca_env['base_url'] + f":{sca_env['web_port']}/sca/api-v1/commonDetail/Component/getComponentListByTaskId"
     headers = {
         'OpenApiUserToken': sca_env['OpenApiUserToken'],
     }
@@ -42,7 +42,7 @@ def get_ComponentList(taskId):
 
 # web接口获取组件无漏洞可用版本
 def get_OtherComponentVersion(hashcode, language):
-    url = sca_env['base_url'] + f"/sca/api-v1/commonDetail/Component/getOtherComponentVersionESPage"
+    url = sca_env['base_url'] + f":{sca_env['web_port']}/sca/api-v1/commonDetail/Component/getOtherComponentVersionESPage"
     headers = {
         'OpenApiUserToken': sca_env['OpenApiUserToken'],
     }
@@ -70,7 +70,7 @@ def get_OtherComponentVersion(hashcode, language):
 
 # web接口获取组件依赖
 def get_ComponentDependency(taskId, **kwargs):
-    url = sca_env['base_url'] + f"/sca/api-v1/commonDetail/Component/getDependencyLevelPathById"
+    url = sca_env['base_url'] + f":{sca_env['web_port']}/sca/api-v1/commonDetail/Component/getDependencyLevelPathById"
     headers = {
         'OpenApiUserToken': sca_env['OpenApiUserToken'],
     }
@@ -129,7 +129,7 @@ def get_ComponentESInfo(taskId, **kwargs):
 
 # openapi接口获取组件详情
 def get_ComponentDetail(**kwargs):
-    url = sca_env['base_url'] + (f":8443/openapi/v1/component/detail?"
+    url = sca_env['base_url'] + (f":{sca_env['api_port']}/openapi/v1/component/detail?"
                                  f"name={kwargs['componentName']}"
                                  f"&language={kwargs['language']}"
                                  f"&vendor={kwargs['vendor']}"
@@ -156,7 +156,7 @@ def get_ComponentDetail(**kwargs):
 
 # web接口获取组件漏洞列表
 def get_ComponentVulList(taskId, **kwargs):
-    url = sca_env['base_url'] + f"/sca/api-v1/commonDetail/Component/getVulListByComponentId"
+    url = sca_env['base_url'] + f":{sca_env['web_port']}/sca/api-v1/commonDetail/Component/getVulListByComponentId"
     headers = {
         'OpenApiUserToken': sca_env['OpenApiUserToken'],
     }
@@ -182,7 +182,7 @@ def get_ComponentVulList(taskId, **kwargs):
 
 # web接口获取镜像检测软件包依赖包信息
 def get_dependencies(hashCode):
-    url = sca_env['base_url'] + f"/sca/api-v1/asset/image/package/{hashCode}/dependencies?pageNum=1&pageSize=100"
+    url = sca_env['base_url'] + f":{sca_env['web_port']}/sca/api-v1/asset/image/package/{hashCode}/dependencies?pageNum=1&pageSize=100"
     headers = {
         'OpenApiUserToken': sca_env['OpenApiUserToken'],
     }

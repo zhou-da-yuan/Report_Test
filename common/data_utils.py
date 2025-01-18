@@ -3,8 +3,6 @@ import os
 import json
 import re
 
-from packaging import version
-
 from common.log import Log
 
 BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -436,7 +434,6 @@ class DataUtils:
 
         return len(vul_list)
 
-
     def vulNumber(self, data_str):
         """
         提取并格式化漏洞信息中的 cveId、cnnvdId、cweId 或 vulId，
@@ -634,7 +631,6 @@ def clean_json_string(json_str):
     return cleaned_str
 
 
-# 示例用法
 if __name__ == "__main__":
     f = DataUtils()
     data_str = "{'componentEsId': '', 'componentName': '', 'componentVersion': '', 'language': '', 'author': None, 'vendor': '', 'homeUrl': '', 'downloadUrl': '', 'sourceUrl': '', 'docUrl': '', 'description': '', 'migrationComponentList': [], 'licenseList': None, 'vulList': None}"

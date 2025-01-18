@@ -17,7 +17,7 @@ def main():
 
     file_path = os.path.join(BASE_PATH, r'Packages\alpine.tar')
 
-    url = sca_env['base_url'] + ":8443/openapi/v1/image/detect-file"
+    url = sca_env['base_url'] + f":{sca_env['api_port']}/openapi/v1/image/detect-file"
     project_name = ini.get_value('variables', 'projectName')
     imageDetectName = f"imageDetect{RandomDataGenerator().numerify(4)}"
     payload = {'projectName': project_name,
