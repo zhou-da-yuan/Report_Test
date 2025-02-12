@@ -24,7 +24,6 @@ def main():
                'applicationName': binaryDetectName,
                'applicationVersion': 'test1',
                'applicationDescription': '这个是应用描述',
-               'enablePoison': 'true',
                'isAddRvcTask': 1
                }
     files = [

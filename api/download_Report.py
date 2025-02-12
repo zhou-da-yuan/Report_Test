@@ -105,4 +105,4 @@ def main(fileName):
 
 
 if __name__ == '__main__':
-    main("源码检测报告test")
+    main("镜像检测报告")

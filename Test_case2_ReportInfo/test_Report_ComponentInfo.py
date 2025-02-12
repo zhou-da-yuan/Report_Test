@@ -17,6 +17,8 @@ ini = INIManager(BASE_PATH + r'\api\variables.ini')
 
 
 def test_source_componentInfo():
+    log.info("----------Begin test_source_componentInfo----------")
+
     report_file_path = os.path.join(BASE_PATH, 'Reports', '源码检测报告.xlsx')
     marked_output_file_path = os.path.join(BASE_PATH, 'Reports', '标记副本_源码检测报告.xlsx')  # 标记副本文件路径
 
@@ -101,6 +103,8 @@ def test_source_componentInfo():
 
 # 二进制报告检出组件信息测试
 def test_binary_componentInfo():
+    log.info("----------Begin test_binary_componentInfo----------")
+
     report_file_path = os.path.join(BASE_PATH, 'Reports', '二进制检测报告.xlsx')
     marked_output_file_path = os.path.join(BASE_PATH, 'Reports', '标记副本_二进制检测报告.xlsx')  # 标记副本文件路径
 
@@ -185,6 +189,9 @@ def test_binary_componentInfo():
 
 # 镜像报告检出软件包信息测试
 def test_image_componentInfo():
+    log.info("----------Begin test_image_componentInfo----------")
+
+
     report_file_path = os.path.join(BASE_PATH, 'Reports', '镜像检测报告.xlsx')
     marked_output_file_path = os.path.join(BASE_PATH, 'Reports', '标记副本_镜像检测报告.xlsx')  # 标记副本文件路径
 

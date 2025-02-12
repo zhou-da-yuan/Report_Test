@@ -2,14 +2,14 @@
 
 # 当前测试使用环境
 use:
-  192.168.111.117
+  192.168.111.6
 
 192.168.111.6:
   base_url: 'https://192.168.111.6'
   api_port: '30002'
   web_port: '30001'
   user: 'circle'
-  OpenApiUserToken: '15a309277a394eeeaf88f41d3e1bde76'
+  OpenApiUserToken: '9802cfa145104ac29dd2480c61191215'
 
 192.168.111.117:
   base_url: 'https://192.168.111.117'
@@ -17,6 +17,13 @@ use:
   web_port: '30001'
   user: 'circle'
   OpenApiUserToken: '041d495ff6434c22baeb0c64ff8b5b25'
+
+10.1.101.10:
+  base_url: 'https://10.1.101.10'
+  api_port: '30002'
+  web_port: '30001'
+  user: 'xmirror'
+  OpenApiUserToken: 'ad396c8e5904459c92ba19bc7a864128'
 
 192.168.111.113:
   base_url: 'https://192.168.111.113'

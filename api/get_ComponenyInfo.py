@@ -101,7 +101,7 @@ def get_ComponentDependency(taskId, **kwargs):
 
 # web接口获取组件ES详情信息
 def get_ComponentESInfo(taskId, **kwargs):
-    url = sca_env['base_url'] + (f"/sca/api-v1/commonDetail/Component/getComponentESInfoByCondition?"
+    url = sca_env['base_url'] + (f":{sca_env['web_port']}/sca/api-v1/commonDetail/Component/getComponentESInfoByCondition?"
                                  f"taskId={taskId}"
                                  f"&language={kwargs['language']}"
                                  f"&version={kwargs['version']}"
@@ -378,9 +378,6 @@ if __name__ == '__main__':
     #     info = InfoGet("binarytaskid", ComponentInfo)
     #     print(info.get_binary_appInfo())
 
-    taskId = ini.get_value('variables', 'imagetaskid')
+    taskId = ini.get_value('variables', 'binarytaskid')
     ComponentListInfo = get_ComponentList(taskId)['data']['records']
-    for ComponentInfo in ComponentListInfo:
-        info = InfoGet("imagetaskid", ComponentInfo)
-        print(info.get_image_appInfo())
-
+    print(ComponentListInfo)

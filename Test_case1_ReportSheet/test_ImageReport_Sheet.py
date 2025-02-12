@@ -12,9 +12,9 @@ log = Log()
 # 实例用例与测试数据
 excel = Excel(BASE_PATH + f'\Reports\镜像检测报告.xlsx', 'D://供应链场景excel报告.xlsx', "sheet标题及表头测试")
 
-# 下载报告
-def setup_module(module):
-    Get_Report.image()
+# # 下载报告
+# def setup_module(module):
+#     Get_Report.image()
 
 # 清理测试数据
 def teardown_module(module):

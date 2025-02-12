@@ -33,6 +33,7 @@ class JsonUtil:
         """
         递归遍历数据结构，查找并替换字符串中的占位符。
         占位符格式为 {object.method} 或 {object.attribute}。
+        根据特定规则转换替换后的字符串值。
         """
         if isinstance(data, dict):
             for key, value in data.items():
@@ -47,9 +48,20 @@ class JsonUtil:
                     # 移除 { 和 } 并解析占位符
                     expression = placeholder[1:-1]
                     result = self.resolve_placeholder(expression, objects)
+
+                    # 特定规则转换
+                    if str(result).strip().lower() == 'true':
+                        result = '已开启'
+                    elif str(result).strip().lower() == 'false':
+                        result = '未开启'
+                    # elif str(result).strip() == '1':
+                    #     result = '是'
+                    # elif str(result).strip() == '0':
+                    #     result = '否'
+
                     data = data.replace(placeholder, str(result))
                 except Exception as e:
-                    print(f"Error resolving {expression}: {e}")
+                    print(f"Error resolving（替换占位符失败） {expression}: {e}")
         return data
 
     @staticmethod

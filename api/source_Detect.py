@@ -1,4 +1,5 @@
 import os
+from enum import verify
 
 from common.faker_data import RandomDataGenerator
 from common.request import RunMethod
@@ -28,10 +29,10 @@ def main():
                'isAddSocTask': 'false'
                }
     files = [
-        ('file', ('fastweixin-master.zip', open(file_path, 'rb'), 'application/zip'))
+        ('file', ('fastweixin-master.zip', open(file_path, 'rb')))
     ]
     headers = {
-        'OpenApiUserToken': sca_env['OpenApiUserToken'],
+        'OpenApiUserToken': sca_env['OpenApiUserToken']
     }
     try:
         response = RunMethod().api_run("POST", url, headers=headers, data=payload, files=files)

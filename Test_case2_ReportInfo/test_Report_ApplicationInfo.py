@@ -15,6 +15,7 @@ data_utils = DataUtils()
 
 # 源码应用信息测试
 def test_source_appInfo():
+    log.info("----------Begin test_source_appInfo----------")
     # Get_Report.source()
     info = InfoGet("sourceTaskId")
     excel = Excel(BASE_PATH + r'\Reports\源码检测报告.xlsx', 'D://供应链场景excel报告.xlsx', "sheet标题及表头测试")
@@ -35,7 +36,7 @@ def test_source_appInfo():
             log.error(f"Key '{key}': Values differ - Report: '{report_value}', Case: '{case_value}'")
             flag = False
     if flag:
-        log.info(f"所有应用信息匹配成功")
+        log.info(f"所有应用信息匹配成功-PASS")
         assert True, f"所有应用信息匹配成功"
     else:
         log.error(f"部分应用信息匹配失败，请查看日志")
@@ -47,6 +48,7 @@ def test_source_appInfo():
 
 # 二进制应用信息测试
 def test_binary_appInfo():
+    log.info("----------Begin test_binary_appInfo----------")
     # Get_Report.source()
     info = InfoGet("binaryTaskId")
     excel = Excel(BASE_PATH + r'\Reports\二进制检测报告.xlsx', 'D://供应链场景excel报告.xlsx', "sheet标题及表头测试")
@@ -67,7 +69,7 @@ def test_binary_appInfo():
             log.error(f"Key '{key}': Values differ - Report: '{report_value}', Case: '{case_value}'")
             flag = False
     if flag:
-        log.info(f"所有应用信息匹配成功")
+        log.info(f"所有应用信息匹配成功-PASS")
         assert True, f"所有应用信息匹配成功"
     else:
         log.error(f"部分应用信息匹配失败，请查看日志")
@@ -79,6 +81,7 @@ def test_binary_appInfo():
 
 # 镜像应用信息测试
 def test_image_appInfo():
+    log.info("----------Begin test_image_appInfo----------")
     # Get_Report.source()
     info = InfoGet("imageTaskId")
     excel = Excel(BASE_PATH + r'\Reports\镜像检测报告.xlsx', 'D://供应链场景excel报告.xlsx', "sheet标题及表头测试")
@@ -99,7 +102,7 @@ def test_image_appInfo():
             log.error(f"Key '{key}': Values differ - Report: '{report_value}', Case: '{case_value}'")
             flag = False
     if flag:
-        log.info(f"所有应用信息匹配成功")
+        log.info(f"所有应用信息匹配成功-PASS")
         assert True, f"所有应用信息匹配成功"
     else:
         log.error(f"部分应用信息匹配失败，请查看日志")
