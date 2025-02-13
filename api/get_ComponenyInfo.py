@@ -201,6 +201,32 @@ def get_dependencies(hashCode):
         log.error(f"et_dependencies获取镜像检测软件包依赖包信息失败-{e}")
         print(e)
 
+# web接口获取镜像检测软件包依赖包信息
+def get_LicenseList(taskId,hashCode):
+    url = sca_env['base_url'] + f":{sca_env['web_port']}/sca/api-v1/commonDetail/Component/getLicenseListByComponentId"
+    headers = {
+        'OpenApiUserToken': sca_env['OpenApiUserToken'],
+    }
+    payload = {"pageNum": 1,
+               "pageSize": 1000,
+               "taskId": taskId,
+               "hashCode": hashCode
+               }
+
+    try:
+        response = RunMethod().api_run("POST", url, json=payload, headers=headers)
+        if response.json()['code'] == 0:
+            log.info("get_LicenseList-获取组件许可证列表成功")
+            print(f"get_LicenseList-获取组件许可证列表成功{response.json()}")
+            return response.json()
+        else:
+            log.error(f"get_LicenseList-获取组件许可证列表请求失败{response.json()}")
+            print(f"get_LicenseList-获取组件许可证列表请求失败{response.json()}")
+
+    except Exception as e:
+        log.error(f"get_LicenseList-获取组件许可证列表失败-{e}")
+        print(e)
+
 
 class InfoGet:
     def __init__(self, taskId_type, ComponentInfo):
@@ -253,7 +279,10 @@ class InfoGet:
             'ComponentVulList': get_ComponentVulList(
                 self.taskId,
                 hashCode=data['hashCode']
-            )['data']
+            )['data'],
+            'LicenseList': get_LicenseList(self.taskId,
+                hashCode=data['hashCode']
+            )['data'],
         }
 
     def _clean_app_info(self, app_info, transformations):
@@ -334,8 +363,8 @@ class InfoGet:
         if self.objects is None:
             return self._error_response("镜像检测检出软件包信息")
 
-        keys_to_remove = ["ComponentVersionInfo", "ComponentESInfo"]
-        [self.objects.pop(key, None) for key in keys_to_remove]
+        # keys_to_remove = ["ComponentVersionInfo", "ComponentESInfo"]
+        # [self.objects.pop(key, None) for key in keys_to_remove]
 
         dependenciesInfo = get_dependencies(self.ComponentInfo['hashCode'])['data']
         self.objects.update({"dependenciesInfo": dependenciesInfo})
@@ -346,11 +375,15 @@ class InfoGet:
             '风险等级': DataUtils().riskLevel_Trans,
             '许可证数': DataUtils().licenseCount,
             '许可证信息': DataUtils().license_Trans,
-            '漏洞数': DataUtils().vulCount_image,
+            '漏洞数': DataUtils().vulCount_web,
             '漏洞编号': DataUtils().vulNumber,
             '依赖包名称': DataUtils().dependencies_Trans,
             '检出路径数': DataUtils().dependencyCount,
-            '依赖包数': int
+            '依赖包数': int,
+            '恶意组件': DataUtils().is_Trans,
+            '私有组件': DataUtils().is_Trans,
+            '无漏洞可用版本': DataUtils().noVulVersion_Trans,
+            '组件类型':DataUtils().componentType
         }
 
         cleaned_app_info = self._clean_app_info(app_info, transformations)
@@ -378,6 +411,14 @@ if __name__ == '__main__':
     #     info = InfoGet("binarytaskid", ComponentInfo)
     #     print(info.get_binary_appInfo())
 
-    taskId = ini.get_value('variables', 'binarytaskid')
-    ComponentListInfo = get_ComponentList(taskId)['data']['records']
-    print(ComponentListInfo)
+    # taskId = ini.get_value('variables', 'imagetaskid')
+    # ComponentListInfo = get_ComponentList(taskId)['data']['records']
+    # for ComponentInfo in ComponentListInfo:
+    #     info = InfoGet("imagetaskid", ComponentInfo)
+    #     print(info.get_image_appInfo())
+
+    # taskId = ini.get_value('variables', 'binarytaskid')
+    # ComponentListInfo = get_ComponentList(taskId)['data']['records']
+    # print(ComponentListInfo)
+
+    print(get_LicenseList(ini.get_value('variables', 'imagetaskid'),59995141))

@@ -18,7 +18,7 @@ def test_source_appInfo():
     log.info("----------Begin test_source_appInfo----------")
     # Get_Report.source()
     info = InfoGet("sourceTaskId")
-    excel = Excel(BASE_PATH + r'\Reports\源码检测报告.xlsx', 'D://供应链场景excel报告.xlsx', "sheet标题及表头测试")
+    excel = Excel(BASE_PATH + r'\Reports\源码检测报告.xlsx')
 
     report_data = excel.get_ApplicationInfo()
     case_data = info.get_source_appInfo()
@@ -51,7 +51,7 @@ def test_binary_appInfo():
     log.info("----------Begin test_binary_appInfo----------")
     # Get_Report.source()
     info = InfoGet("binaryTaskId")
-    excel = Excel(BASE_PATH + r'\Reports\二进制检测报告.xlsx', 'D://供应链场景excel报告.xlsx', "sheet标题及表头测试")
+    excel = Excel(BASE_PATH + r'\Reports\二进制检测报告.xlsx')
 
     report_data = excel.get_ApplicationInfo()
     case_data = info.get_binary_appInfo()
@@ -84,7 +84,7 @@ def test_image_appInfo():
     log.info("----------Begin test_image_appInfo----------")
     # Get_Report.source()
     info = InfoGet("imageTaskId")
-    excel = Excel(BASE_PATH + r'\Reports\镜像检测报告.xlsx', 'D://供应链场景excel报告.xlsx', "sheet标题及表头测试")
+    excel = Excel(BASE_PATH + r'\Reports\镜像检测报告.xlsx')
 
     report_data = excel.get_ApplicationInfo()
     case_data = info.get_image_appInfo()

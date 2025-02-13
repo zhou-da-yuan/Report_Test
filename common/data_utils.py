@@ -269,15 +269,16 @@ class DataUtils:
         抛出:
             ValueError: 如果输入数据格式不正确或解析失败。
         """
-        if data_str == '':
+        if not data_str.strip():
             log.info("该组件无许可证")
             return ""
+
         try:
             # 将字符串转换为列表
             data = ast.literal_eval(data_str)
             if not isinstance(data, list) or not all(isinstance(item, dict) for item in data):
                 raise ValueError("输入不是一个有效的许可证数据列表。")
-        except (ValueError, SyntaxError) as e:
+        except json.JSONDecodeError as e:
             raise ValueError(f"无效的许可证数据字符串: {e}")
 
         # 定义风险等级映射
@@ -294,19 +295,27 @@ class DataUtils:
             reverse=False  # 从高到低排序，1为最高风险，3为最低风险
         )
 
-        # 生成格式化字符串
-        formatted_output = []
+        # 使用字典按风险级别分组
+        grouped_by_risk = {}
         for item in sorted_data:
             security_level = item.get('securityLevel')
-            name = item.get('name')
+            name = item.get('shortName')
 
             if security_level not in risk_level_map:
                 continue  # 跳过无效的风险级别
 
             risk_description = risk_level_map[security_level]
-            formatted_output.append(f"{risk_description}：{name}")
+            if risk_description not in grouped_by_risk:
+                grouped_by_risk[risk_description] = []
+            grouped_by_risk[risk_description].append(name)
 
-        return '; '.join(formatted_output) + ';' if formatted_output else ""
+        # 生成格式化字符串
+        formatted_output = []
+        for risk_level, names in grouped_by_risk.items():
+            formatted_names = ','.join(names)
+            formatted_output.append(f"{risk_level}：{formatted_names}")
+
+        return ';'.join(formatted_output) + ';' if formatted_output else ""
 
     def noVulVersion_Trans(self, data_str):
         """
@@ -413,18 +422,19 @@ class DataUtils:
             if security_level_id in severity_map:
                 severity_counts[severity_map[security_level_id]] += 1
 
-        # 确保至少有一个严重程度的计数大于 0
+        # 构造输出字符串
         non_zero_severities = [f"{severity}:{count}" for severity, count in severity_counts.items()]
         formatted_output = f"{total_vul_count}({';'.join(non_zero_severities)})" if non_zero_severities else f"{total_vul_count}(严重:0;高危:0;中危:0;低危:0)"
 
         return formatted_output
 
-    def vulCount_image(self, data_str):
+    def vulCount_web(self,data_str):
         """
-        镜像检测统计漏洞数量。
+        统计漏洞数量及不同严重程度的漏洞数量。
+        使用web接口
 
         参数:
-            data_str (str): 包含组件信息和漏洞列表的 JSON 字符串。
+            data_str (str): 包含漏洞列表的 JSON 字符串。
 
         返回:
             str: 总漏洞数量及不同严重程度的漏洞数量的格式化字符串。
@@ -433,18 +443,43 @@ class DataUtils:
             ValueError: 如果输入数据格式不正确或解析失败。
         """
         if not data_str or data_str.strip() == '':
-            log.debug("该软件包无漏洞")
-            return 0
+            log.debug("该组件无漏洞")
+            return "0(严重:0;高危:0;中危:0;低危:0)"
 
         try:
-            # 使用 ast.literal_eval 安全解析 Python 字面量列表字符串
+            # 尝试使用 ast.literal_eval 安全解析 Python 字面量表达式
             vul_list = ast.literal_eval(data_str)
             if not isinstance(vul_list, list):
-                raise ValueError("输入不是一个有效的漏洞列表字符串。")
-        except (ValueError, SyntaxError) as e:
-            raise ValueError(f"无效的漏洞列表字符串: {e}")
+                raise ValueError("输入不是一个有效的漏洞数据列表。")
+        except json.JSONDecodeError as e:
+            raise ValueError(f"无效的漏洞数据字符串: {e}")
 
-        return len(vul_list)
+        # 定义严重程度映射
+        severity_map = {
+            1: '严重',
+            2: '高危',
+            3: '中危',
+            4: '低危'
+        }
+
+        # 初始化统计变量
+        total_vul_count = len(vul_list)
+        severity_counts = {severity: 0 for severity in severity_map.values()}  # 默认全部设为0
+
+        # 统计不同严重程度的漏洞数量
+        for vul in vul_list:
+            security_level_id = vul.get('securityLevelId')
+            if security_level_id in severity_map:
+                severity_counts[severity_map[security_level_id]] += 1
+
+        # 构造输出字符串
+        formatted_output = f"{total_vul_count}("
+        for severity, count in severity_counts.items():
+            formatted_output += f"{severity}:{count};"
+        # 去掉最后一个多余的分号
+        formatted_output = formatted_output.rstrip(';') + ")"
+
+        return formatted_output
 
     def vulNumber(self, data_str):
         """
@@ -603,6 +638,33 @@ class DataUtils:
         except Exception as e:
             log.error(f"处理数据时发生错误: {e}")
             return 0
+
+    def componentType(self, data_str):
+        """
+        根据传入的数字字符串返回对应的组件类型描述。
+
+        参数:
+            data_str (str): 组件类型的数字字符串表示。
+
+        返回:
+            str: 对应的组件类型描述。
+
+        抛出:
+            ValueError: 如果输入数据不是有效的数字字符串或不在预定义范围内。
+        """
+        # 定义组件类型映射
+        component_type_map = {
+            '1': '组件',
+            '2': '系统级软件包',
+            '3': 'SDK'
+        }
+
+        # 检查输入是否为有效的数字字符串并且在预定义范围内
+        if not data_str.isdigit() or data_str not in component_type_map:
+            raise ValueError(f"无效的组件类型数字字符串: {data_str}")
+
+        # 返回对应的组件类型描述
+        return component_type_map[data_str]
 
 
 def str_to_list(list_str):

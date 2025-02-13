@@ -44,7 +44,7 @@ class Log:
         self.logger.addHandler(fh)
         # 创建一个 StreamHandler,用于输出到控制台
         ch = logging.StreamHandler()
-        ch.setLevel(logging.WARNING)
+        ch.setLevel(logging.ERROR)
         ch.setFormatter(self.formatter_color)
         self.logger.addHandler(ch)
         if level == 'info':

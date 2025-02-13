@@ -200,6 +200,11 @@ class Excel:
                         f"  API提供的值: {value}\n"
                         f"  报告中的值: {report_value}"
                     )
+                    print(
+                        f"测试失败：{key} 不匹配\n"
+                        f"  API提供的值: {value}\n"
+                        f"  报告中的值: {report_value}"
+                    )
                     failed_cells.append((matching_row.index[0] + 2, matching_row.columns.get_loc(key) + 1))
 
         return failed_cells

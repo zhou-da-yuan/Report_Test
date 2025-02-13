@@ -199,7 +199,7 @@ def test_image_componentInfo():
     excel = Excel(report_file_path=report_file_path, output_file_path=marked_output_file_path)
     excel.create_report_result()
 
-    target_sheet = '检出软件包信息'  # 指定要操作的工作表名称
+    target_sheet = '检出组件信息'  # 指定要操作的工作表名称
 
     # 加载指定的工作表数据
     excel_data = excel.get_ReportSheet(target_sheet, fillna_value='')
@@ -226,10 +226,10 @@ def test_image_componentInfo():
                 info = InfoGet("imagetaskid", component_info)
                 json_dict = info.get_image_appInfo()
 
-                component_name = json_dict.get('软件包名称')
+                component_name = json_dict.get('组件名称')
 
                 # 定义需要匹配的键
-                keys_to_match = ['软件包名称', '版本号', '组织']
+                keys_to_match = ['组件名称', '版本号', '组织']
 
                 log.info(f"正在运行测试 ComponentName:{component_name}...")
                 # 查找匹配行
