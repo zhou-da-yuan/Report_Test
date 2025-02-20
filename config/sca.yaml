@@ -2,7 +2,7 @@
 
 # 当前测试使用环境
 use:
-  192.168.111.6
+  192.168.111.113
 
 192.168.111.6:
   base_url: 'https://192.168.111.6'
@@ -27,5 +27,7 @@ use:
 
 192.168.111.113:
   base_url: 'https://192.168.111.113'
+  api_port: '30002'
+  web_port: '30001'
   user: 'circle'
-  OpenApiUserToken: '566152bac57748fda2b1eb1002224564'
+  OpenApiUserToken: 'b16f2634759f4845a47b8ccdcab92dd0'

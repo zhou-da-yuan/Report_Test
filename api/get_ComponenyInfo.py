@@ -328,6 +328,7 @@ class InfoGet:
             '组件依赖路径': DataUtils().dependencyPath_Trans,
             '漏洞数': DataUtils().vulCount,
             '漏洞编号': DataUtils().vulNumber,
+            '推荐升级版本':DataUtils().recommendVersion_Trans
         }
 
         cleaned_app_info = self._clean_app_info(app_info, transformations)
@@ -399,11 +400,11 @@ class InfoGet:
 
 
 if __name__ == '__main__':
-    # taskId = ini.get_value('variables', 'sourcetaskid')
-    # ComponentListInfo = get_ComponentList(taskId)['data']['records']
-    # for ComponentInfo in ComponentListInfo:
-    #     info = InfoGet("sourcetaskid", ComponentInfo)
-    #     print(info.get_source_appInfo())
+    taskId = ini.get_value('variables', 'sourcetaskid')
+    ComponentListInfo = get_ComponentList(taskId)['data']['records']
+    for ComponentInfo in ComponentListInfo:
+        info = InfoGet("sourcetaskid", ComponentInfo)
+        print(info.get_source_appInfo())
 
     # taskId = ini.get_value('variables', 'binarytaskid')
     # ComponentListInfo = get_ComponentList(taskId)['data']['records']
@@ -421,4 +422,4 @@ if __name__ == '__main__':
     # ComponentListInfo = get_ComponentList(taskId)['data']['records']
     # print(ComponentListInfo)
 
-    print(get_ComponentVulList(ini.get_value('variables', 'imagetaskid'),hashCode=59995141))
+    # print(get_ComponentList(ini.get_value('variables', 'sourcetaskid')))

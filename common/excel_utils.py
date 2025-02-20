@@ -7,6 +7,7 @@ import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
 
+from common.helpers import compare_risk
 from common.log import Log
 
 # 忽略特定的警告
@@ -194,6 +195,8 @@ class Excel:
             if key in matching_row.columns:
                 report_value = matching_row[key].iloc[0]
                 if report_value != value:
+                    if key == "许可证信息" and compare_risk(report_value,value): # 许可证信息接口与报告数据顺序不一致需要辅助匹配测试
+                        return failed_cells
                     # 记录不匹配的详细信息
                     self.log.error(
                         f"测试失败：{key} 不匹配\n"

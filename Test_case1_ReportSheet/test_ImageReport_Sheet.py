@@ -2,7 +2,6 @@ import os
 
 import pytest
 
-from Reports import Get_Report
 from common.excel_utils import Excel
 from common.log import Log
 
@@ -10,16 +9,15 @@ BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 log = Log()
 
 # 实例用例与测试数据
-excel = Excel(BASE_PATH + f'\Reports\镜像检测报告.xlsx', BASE_PATH+f'\casedata\供应链场景excel报告测试.xlsx', "sheet标题及表头测试")
+excel = Excel(BASE_PATH + f'\Downloads\镜像检测报告.xlsx', BASE_PATH + f'\casedata\供应链场景excel报告测试.xlsx',
+              "sheet标题及表头测试")
 
-# # 下载报告
-# def setup_module(module):
-#     Get_Report.image()
 
 # 清理测试数据
 def teardown_module(module):
     excel.close()
     log.info("test_ImageReport_Sheet测试结束，报告已关闭！")
+
 
 class TestSheet:
     # 测试工作表标题
@@ -44,11 +42,11 @@ class TestSheet:
             pytest.fail(f"发生错误: {e}")
 
     # 测试每个工作表的表头
-    @pytest.mark.parametrize("sheet_name",excel.read_caseData('镜像检测', 'sheet标题'))
+    @pytest.mark.parametrize("sheet_name", excel.read_caseData('镜像检测', 'sheet标题'))
     def test_sheet_headers(self, sheet_name):
         try:
             case_data = excel.read_caseData('镜像检测', sheet_name)
-            if case_data :
+            if case_data:
                 headers = excel.read_report_headers(sheet_name)
                 if case_data != headers:
                     diff = set(case_data).symmetric_difference(set(headers))
@@ -64,4 +62,3 @@ class TestSheet:
                 log.warning("没有找到对应的测试用例数据。")
         except Exception as e:
             pytest.fail(f"发生错误: {e}")
-

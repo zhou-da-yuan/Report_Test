@@ -17,7 +17,7 @@
     "许可证冲突": "否",
     "漏洞数": "{ComponentDetailInfo}",
     "漏洞编号": "{ComponentVulList.records}",
-    "推荐升级版本": "{ComponentInfo.recommendVersion}",
+    "推荐升级版本": "{ComponentInfo.recommendVersion}\n{ComponentInfo.migrationVendor}:{ComponentInfo.migrationName}:{ComponentInfo.migrationRecommendVersion}",
     "最新发布版本": "{ComponentInfo.lastVersion}",
     "无漏洞可用版本": "{ComponentVersionInfo.records}",
     "组件状态": "{ComponentInfo.componentStatusStr}",

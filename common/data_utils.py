@@ -666,6 +666,35 @@ class DataUtils:
         # 返回对应的组件类型描述
         return component_type_map[data_str]
 
+    def recommendVersion_Trans(self, data):
+        """
+        接收一个字符串参数，如果是两段的形式（用换行符分隔），
+        则转换为指定格式；如果只有一段，则去掉末尾的换行符。
+        如果字符串以换行符开头，则认为是迁移后组件的信息。
+
+        :param data: 输入的字符串
+        :return: 格式化后的字符串
+        """
+        # 去除首尾可能存在的空白字符，但保留换行符
+        data = data.strip('\r\t ').replace('\t', '').replace('\r', '')
+
+        if data.startswith('\n'):
+            # 如果字符串以换行符开头，说明只有迁移后组件的信息
+            migrated = data.lstrip('\n').strip()
+            if migrated == '::': # 如果迁移后组件的信息也为空就返回空
+                return ''
+            return f"原组件:-\n迁移后组件:{migrated}"
+        elif '\n' in data:
+            # 如果包含换行符，分割成两部分
+            parts = data.split('\n', 1)
+            original, migrated = parts[0].strip(), parts[1].strip()
+            if migrated == '::': # 如果迁移后组件的信息为空就返回原组件信息
+                return original
+            return f"原组件:{original}\n迁移后组件:{migrated}"
+        else:
+            # 如果没有换行符，直接返回去掉末尾换行符后的字符串
+            return data.rstrip('\n')
+
 
 def str_to_list(list_str):
     """

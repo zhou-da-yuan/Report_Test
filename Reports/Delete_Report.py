@@ -7,9 +7,9 @@ BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 log = Log()
 def all():
     # 删除报告
-    reports_dir = os.path.join(BASE_PATH, 'Reports')
+    reports_dir = os.path.join(BASE_PATH, 'Downloads')
 
-    # 检查 Reports 目录是否存在
+    # 检查 Downloads 目录是否存在
     if not os.path.exists(reports_dir):
         log.warning(f"目录不存在: {reports_dir}")
         print(f"目录不存在: {reports_dir}")

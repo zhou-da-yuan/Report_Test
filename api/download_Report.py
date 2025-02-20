@@ -78,7 +78,7 @@ def main(fileName):
 
                     # 构建下载路径
                     BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-                    download_path = os.path.join(BASE_PATH, 'Reports', fileName + '.xlsx')
+                    download_path = os.path.join(BASE_PATH, 'Downloads', fileName + '.xlsx')
 
                     # 确保下载目录存在
                     download_dir = os.path.dirname(download_path)

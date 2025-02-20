@@ -1,7 +1,6 @@
 import os
 import warnings
 
-from Reports import Get_Report
 from api.get_ComponenyInfo import InfoGet, get_ComponentList
 from common.data_utils import DataUtils
 from common.excel_utils import Excel
@@ -19,8 +18,8 @@ ini = INIManager(BASE_PATH + r'\api\variables.ini')
 def test_source_componentInfo():
     log.info("----------Begin test_source_componentInfo----------")
 
-    report_file_path = os.path.join(BASE_PATH, 'Reports', '源码检测报告.xlsx')
-    marked_output_file_path = os.path.join(BASE_PATH, 'Reports', '标记副本_源码检测报告.xlsx')  # 标记副本文件路径
+    report_file_path = os.path.join(BASE_PATH, 'Downloads', '源码检测报告.xlsx')
+    marked_output_file_path = os.path.join(BASE_PATH, 'Downloads', '标记副本_源码检测报告.xlsx')  # 标记副本文件路径
 
     # 初始化Excel类实例，并创建或打开标记副本
     excel = Excel(report_file_path=report_file_path, output_file_path=marked_output_file_path)
@@ -97,22 +96,22 @@ def test_source_componentInfo():
         excel.mark_cells_in_sheet(all_failed_cells, sheet_name=target_sheet)
         print("所有不匹配内容已标记到输出文件中")
         log.error("测试失败-所有不匹配内容已标记到输出文件中")
-        assert False,'源码报告【检出组件信息】测试失败：存在不匹配的内容，请查看输出文件和日志！'
+        assert False, '源码报告【检出组件信息】测试失败：存在不匹配的内容，请查看输出文件和日志！'
     elif failed_flag:
         log.error("测试失败-报告中可能存在重复数据或缺少某个组件数据")
         assert False, '源码报告【检出组件信息】测试失败：报告中可能存在重复数据或缺少某个组件数据，请查看输出文件和日志！'
     else:
         print("所有测试均通过，无需要标记的不匹配内容")
         log.info("测试通过")
-        assert True,'源码报告【检出组件信息】测试通过！'
+        assert True, '源码报告【检出组件信息】测试通过！'
 
 
 # 二进制报告检出组件信息测试
 def test_binary_componentInfo():
     log.info("----------Begin test_binary_componentInfo----------")
 
-    report_file_path = os.path.join(BASE_PATH, 'Reports', '二进制检测报告.xlsx')
-    marked_output_file_path = os.path.join(BASE_PATH, 'Reports', '标记副本_二进制检测报告.xlsx')  # 标记副本文件路径
+    report_file_path = os.path.join(BASE_PATH, 'Downloads', '二进制检测报告.xlsx')
+    marked_output_file_path = os.path.join(BASE_PATH, 'Downloads', '标记副本_二进制检测报告.xlsx')  # 标记副本文件路径
 
     # 初始化Excel类实例，并创建或打开标记副本
     excel = Excel(report_file_path=report_file_path, output_file_path=marked_output_file_path)
@@ -189,23 +188,22 @@ def test_binary_componentInfo():
         excel.mark_cells_in_sheet(all_failed_cells, sheet_name=target_sheet)
         print("所有不匹配内容已标记到输出文件中")
         log.error("测试失败-所有不匹配内容已标记到输出文件中")
-        assert False,'二进制报告【检出组件信息】测试失败：存在不匹配的内容，请查看输出文件和日志！'
+        assert False, '二进制报告【检出组件信息】测试失败：存在不匹配的内容，请查看输出文件和日志！'
     elif failed_flag:
         log.error("测试失败-报告中可能存在重复数据或缺少某个组件数据")
         assert False, '二进制报告【检出组件信息】测试失败：报告中可能存在重复数据或缺少某个组件数据，请查看输出文件和日志！'
     else:
         print("所有测试均通过，无需要标记的不匹配内容")
         log.info("测试通过")
-        assert True,'二进制报告【检出组件信息】测试通过！'
+        assert True, '二进制报告【检出组件信息】测试通过！'
 
 
 # 镜像报告检出软件包信息测试
 def test_image_componentInfo():
     log.info("----------Begin test_image_componentInfo----------")
 
-
-    report_file_path = os.path.join(BASE_PATH, 'Reports', '镜像检测报告.xlsx')
-    marked_output_file_path = os.path.join(BASE_PATH, 'Reports', '标记副本_镜像检测报告.xlsx')  # 标记副本文件路径
+    report_file_path = os.path.join(BASE_PATH, 'Downloads', '镜像检测报告.xlsx')
+    marked_output_file_path = os.path.join(BASE_PATH, 'Downloads', '标记副本_镜像检测报告.xlsx')  # 标记副本文件路径
 
     # 初始化Excel类实例，并创建或打开标记副本
     excel = Excel(report_file_path=report_file_path, output_file_path=marked_output_file_path)
@@ -282,11 +280,11 @@ def test_image_componentInfo():
         excel.mark_cells_in_sheet(all_failed_cells, sheet_name=target_sheet)
         print("所有不匹配内容已标记到输出文件中")
         log.error("测试失败-所有不匹配内容已标记到输出文件中")
-        assert False,'镜像报告【检出组件信息】测试失败：存在不匹配的内容，请查看输出文件和日志！'
+        assert False, '镜像报告【检出组件信息】测试失败：存在不匹配的内容，请查看输出文件和日志！'
     elif failed_flag:
         log.error("测试失败-报告中可能存在重复数据或缺少某个组件数据")
         assert False, '镜像报告【检出组件信息】测试失败：报告中可能存在重复数据或缺少某个组件数据，请查看输出文件和日志！'
     else:
         print("所有测试均通过，无需要标记的不匹配内容")
         log.info("测试通过")
-        assert True,'镜像报告【检出组件信息】测试通过！'
+        assert True, '镜像报告【检出组件信息】测试通过！'

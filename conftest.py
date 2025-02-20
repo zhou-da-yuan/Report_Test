@@ -74,13 +74,13 @@ def project_manager():
 def Generate_Report():
     # Get_Report.createProject()
     reports = [
-        ('Reports/源码检测报告.xlsx', Get_Report.source),
-        ('Reports/二进制检测报告.xlsx', Get_Report.binary),
-        ('Reports/镜像检测报告.xlsx', Get_Report.image),
+        ('Downloads/源码检测报告.xlsx', Get_Report.source),
+        ('Downloads/二进制检测报告.xlsx', Get_Report.binary),
+        ('Downloads/镜像检测报告.xlsx', Get_Report.image),
     ]
 
     for report_path, generation_method in reports:
-        # 确保 Reports 目录存在
+        # 确保 Downloads 目录存在
         os.makedirs(os.path.dirname(report_path), exist_ok=True)
 
         if not os.path.exists(report_path):
