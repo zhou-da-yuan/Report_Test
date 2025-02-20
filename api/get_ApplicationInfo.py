@@ -133,36 +133,36 @@ class InfoGet:
 
 
 if __name__ == '__main__':
-    # ini = INIManager(BASE_PATH + r'\api\variables.ini')
-    # taskId = ini.get_value('variables', 'binarytaskid')
+    ini = INIManager(BASE_PATH + r'\api\variables.ini')
+    taskId = ini.get_value('variables', 'binarytaskid')
+
+    VOInfo = get_VOInfoByTaskId(taskId)
+    CVLCount = get_CVLCountTaskId(taskId)
+
+
+    # # 测试
+    # excel = Excel(BASE_PATH + r'\Reports\二进制检测报告.xlsx', 'D://供应链场景excel报告.xlsx', "sheet标题及表头测试")
     #
-    # VOInfo = get_VOInfoByTaskId(taskId)
-    # CVLCount = get_CVLCountTaskId(taskId)
-
-
-    # 测试
-    excel = Excel(BASE_PATH + r'\Reports\二进制检测报告.xlsx', 'D://供应链场景excel报告.xlsx', "sheet标题及表头测试")
-
-    report_data = excel.get_ApplicationInfo()
-    info = InfoGet("binaryTaskId")
-    case_data = info.get_binary_appInfo()
-
-    data_utils = DataUtils()
-    comparison_results = data_utils.compare_dicts(report_data, case_data)
-
-    flag = True
-    for key, equal, report_value, case_value in comparison_results:
-        if equal is None:
-            log.warning(f"Key '{key}' not found in report_data.")
-            print(f"Key '{key}' not found in report_data.")
-        elif equal:
-            log.info(f"Key '{key}' 匹配成功！")
-        else:
-            log.error(f"Key '{key}': Values differ - Report: '{report_value}', Case: '{case_value}'")
-            flag = False
-    if flag:
-        log.info(f"所有应用信息匹配成功")
-        assert True, f"所有应用信息匹配成功"
-    else:
-        log.error(f"部分应用信息匹配失败，请查看日志")
-        assert False, f"部分应用信息匹配失败，请查看日志"
+    # report_data = excel.get_ApplicationInfo()
+    # info = InfoGet("binaryTaskId")
+    # case_data = info.get_binary_appInfo()
+    #
+    # data_utils = DataUtils()
+    # comparison_results = data_utils.compare_dicts(report_data, case_data)
+    #
+    # flag = True
+    # for key, equal, report_value, case_value in comparison_results:
+    #     if equal is None:
+    #         log.warning(f"Key '{key}' not found in report_data.")
+    #         print(f"Key '{key}' not found in report_data.")
+    #     elif equal:
+    #         log.info(f"Key '{key}' 匹配成功！")
+    #     else:
+    #         log.error(f"Key '{key}': Values differ - Report: '{report_value}', Case: '{case_value}'")
+    #         flag = False
+    # if flag:
+    #     log.info(f"所有应用信息匹配成功")
+    #     assert True, f"所有应用信息匹配成功"
+    # else:
+    #     log.error(f"部分应用信息匹配失败，请查看日志")
+    #     assert False, f"部分应用信息匹配失败，请查看日志"

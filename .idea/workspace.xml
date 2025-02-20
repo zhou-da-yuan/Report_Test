@@ -5,26 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="142c5c98-611d-465a-a3fb-df8525746c36" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reports/二进制检测报告.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Reports/二进制检测报告.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reports/标记副本_二进制检测报告.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Reports/标记副本_二进制检测报告.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reports/标记副本_源码检测报告.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Reports/标记副本_源码检测报告.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reports/标记副本_镜像检测报告.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reports/源码检测报告.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Reports/源码检测报告.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reports/镜像检测报告.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Reports/镜像检测报告.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case1_ReportSheet/test_BinaryReport_Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case1_ReportSheet/test_BinaryReport_Sheet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case1_ReportSheet/test_ImageReport_Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case1_ReportSheet/test_ImageReport_Sheet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case1_ReportSheet/test_SourceReport_Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case1_ReportSheet/test_SourceReport_Sheet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case2_ReportInfo/test_Report_ApplicationInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case2_ReportInfo/test_Report_ApplicationInfo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case2_ReportInfo/test_Report_ComponentInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case2_ReportInfo/test_Report_ComponentInfo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/get_ComponenyInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/get_ComponenyInfo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/variables.ini" beforeDir="false" afterPath="$PROJECT_DIR$/api/variables.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/casedata/ComponentInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/casedata/ComponentInfo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/data_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/data_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/excel_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/excel_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/log.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/log.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pytest.ini" beforeDir="false" afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +88,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/admin/PycharmProjects/Report_Test/casedata",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "cn.xmirror.xmsca.ui.action.XmirrorConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">

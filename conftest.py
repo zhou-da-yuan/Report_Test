@@ -60,10 +60,16 @@ def project_manager():
     else:
         log.info("项目不存在，创建项目....")
         Get_Report.createProject()
-        log.info("创建项目成功")
+        log.info("删除旧报告....")
+        Delete_Report.all()
+        log.info("使用新项目生成报告....")
+        Get_Report.source()
+        Get_Report.binary()
+        Get_Report.image()
+        log.info("项目报告重新生成成功")
 
 
-# 前置函数-上传检测（确保报告测试时已经生成报告）
+# 确保报告测试时已经生成报告
 @pytest.fixture(scope="module",autouse=True)
 def Generate_Report():
     # Get_Report.createProject()

@@ -421,4 +421,4 @@ if __name__ == '__main__':
     # ComponentListInfo = get_ComponentList(taskId)['data']['records']
     # print(ComponentListInfo)
 
-    print(get_LicenseList(ini.get_value('variables', 'imagetaskid'),59995141))
+    print(get_ComponentVulList(ini.get_value('variables', 'imagetaskid'),hashCode=59995141))
